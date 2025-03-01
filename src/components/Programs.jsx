@@ -134,7 +134,7 @@ const Programs = ({
         "url": `https://clinstitute.co.uk/${params || "default-category"}/${(course?.available_cities?.[0]?.slug) || "default-city"}/${course?.slug || "default-course"}`,
         "provider": {
           "@type": "Organization",
-          "name": "Crown Academy",
+          "name": "London Crown Institute of Training",
           "sameAs": "https://clinstitute.co.uk/"
         },
         "image": {
@@ -192,7 +192,7 @@ const Programs = ({
       >
       <div className="-mt-16 md:-mt-0">
       <div className="pt-3">
-        <SectionTitle1 title="Courses By" highlight={slug} className=""/>
+        <SectionTitle1 reverse title={slug === 'diploma' ? "Diploma" : slug === 'masters' ? "Mini Master" : "Explore Our"} highlight={slug === 'diploma' ? "Training Courses" : slug === 'masters' ? "Training Courses" : "Training Courses"} className=""/>
 </div>
         <div className="relative flex items-center justify-center ">
           {/* Overlay Content */}
@@ -206,11 +206,11 @@ const Programs = ({
                   value={searchInput}
                   onKeyDown={handleSearch}
                   onChange={(e) => setSearchInput(e.target.value)}
-                  className="flex-grow text-primary px-4 py-2 text-sm rounded-md md:text-base placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="flex-grow px-4 py-2 text-sm rounded-md md:text-base placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                 />
                 <button
                   onClick={handleSearch}
-                  className="px-4 py-2 ml-2  text-sm text-white transition-colors bg-primary rounded-md md:text-base md:px-6 md:py-2 hover:bg-primary/80"
+                  className="px-4 py-2 ml-2 text-sm text-white transition-colors bg-primary rounded-md md:text-base md:px-6 md:py-2 hover:bg-primary/80"
                 >
                   Search
                 </button>
@@ -225,7 +225,7 @@ const Programs = ({
                   setSelectedMonth(e.target.value);
                   updateSearchParams("month", e.target.value);
                 }}
-                className="w-full px-4 py-2 text-primary text-sm border border-gray-300 rounded-md md:text-base focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md md:text-base focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">Month</option>
                 {[
@@ -253,7 +253,7 @@ const Programs = ({
                   setSelectedYear(e.target.value);
                   updateSearchParams("year", e.target.value);
                 }}
-                className="w-full px-4 py-2 text-primary text-sm border border-gray-300 rounded-md md:text-base focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md md:text-base focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">Year</option>
                 {[2024, 2025, 2026].map((year) => (
@@ -268,7 +268,7 @@ const Programs = ({
                   setSelectedSpecialization(e.target.value);
                   updateSearchParams("specialization", e.target.value);
                 }}
-                className="w-full px-4 py-2 text-primary text-sm border border-gray-300 rounded-md md:text-base focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md md:text-base focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">Specialization</option>
                 {specialization?.data?.map((spec) => (
@@ -283,7 +283,7 @@ const Programs = ({
                   setSelectedCategory(e.target.value);
                   updateSearchParams("category", e.target.value);
                 }}
-                className="w-full px-4 py-2 text-primary text-sm border border-gray-300 rounded-md md:text-base focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md md:text-base focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">Category</option>
                 {category?.data?.map((cat) => (
@@ -298,7 +298,7 @@ const Programs = ({
                   setSelectedCity(e.target.value);
                   updateSearchParams("city", e.target.value);
                 }}
-                className="w-full px-4 py-2 text-primary text-sm border border-gray-300 rounded-md md:text-base focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md md:text-base focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">City</option>
                 {city?.data?.map((c) => (

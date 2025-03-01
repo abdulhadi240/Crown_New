@@ -137,12 +137,12 @@ const City = ({
         "url": `https://clinstitute.co.uk/${params || "default-category"}/${course?.specialization_slug || "default-specialization"}/${course?.slug || "default-course"}`,
         "provider": {
           "@type": "Organization",
-          "name": "Crown Academy",
+          "name": "London Crown Institute of Training",
           "sameAs": "https://clinstitute.co.uk/"
         },
         "image": {
           "@type": "ImageObject",
-          "url": course?.image || "https://clinstitute.co.uk/default-course-image.webp"
+          "url": course?.image || "https://clinstitute.co.uk/Logocrown.webp",
         },
         "hasCourseInstance": {
           "@type": "CourseInstance",

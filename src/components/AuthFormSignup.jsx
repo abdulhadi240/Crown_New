@@ -46,7 +46,7 @@ const AuthFormSignup = () => {
         setApiError(response?.message || "Something went wrong.");
 
       }
-      navigate.push("/login"); // ✅ Redirect to the login page after successful signup
+      navigate.push("/sign-in"); // ✅ Redirect to the login page after successful signup
     } catch (error) {
       setApiError(error.response?.data?.message || "Something went wrong.");
     } finally {

@@ -6,6 +6,8 @@ import { useState } from "react";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import useMeasure from "react-use-measure";
 import BLogsCardIndiviual from "./BLogsCardIndiviual";
+import { useSwipeable } from "react-swipeable";
+
 
 const CARD_WIDTH = 320; // Width of each card
 const MARGIN = 20; // Margin between cards
@@ -38,8 +40,16 @@ console.log(data , "data")
     setOffset(-index * CARD_SIZE * CARDS_PER_DOT);
   };
 
+  // Swipe handlers
+    const handlers = useSwipeable({
+      onSwipedLeft: shiftRight,
+      onSwipedRight: shiftLeft,
+      preventScrollOnSwipe: true,
+      trackMouse: true, // Also allows desktop swiping
+    });
+
   return (
-    <section className="pb-8" ref={ref}>
+    <section className="pb-8" ref={ref} {...handlers}>
       <div className="relative overflow-hidden p-4">
         <div className="mx-auto ">
           <motion.div

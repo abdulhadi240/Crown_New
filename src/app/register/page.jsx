@@ -228,11 +228,12 @@ export default function Page() {
     <>
       <Head>
         <meta name="csrf-token" content="{{ csrf_token() }}"></meta>
+        <meta name="robots" content="noindex, nofollow" />
       </Head>
       <Design secondary={true} bg></Design>
       <div className="min-h-screen py-10 mt-10 bg-gray-100 flex items-center justify-center text-base">
         <div className="bg-white shadow-md rounded-lg md:p-6 p-4 w-full max-w-3xl">
-          <h1 className="text-2xl font-semibold mb-6 text-center">
+          <h1 className="text-2xl font-semibold mb-6 text-center text-primary">
             Register Course
           </h1>
 

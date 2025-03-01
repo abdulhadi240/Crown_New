@@ -15,14 +15,14 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "Crown Institute for Training & Development",
-  description: "Crown Institute for Training & Development",
+  title: "London Crown Institute of Training",
+  description: "London Crown Institute of Training offers expert-led courses and professional training to enhance your career and skills.",
   keywords: "Training Courses, Professional Development, Diploma Programs, Master's Programs, Consulting Services, Team Building Workshops, Project Management Courses, Leadership Training, Human Resources Courses, Quality Management Training, Health and Safety Courses, Engineering Training, Information Technology Courses, Public Relations Training, Financial Management Courses, Business Training, Corporate Training Solutions, Employee Development Programs, Online Training Courses, Management Training, Skill Development Workshops, Executive Coaching, Business Consultancy, Workplace Training Programs, Human Resource Management, Continuous Professional Development, Leadership Skills Development, Certified Training Programs, Career Advancement Courses, Workplace Safety Training, Training Institute, Vocational Training Courses",
   openGraph: {
     type: "website",
     locale: "en_US",
-    site_name: "Crown Institute for Training & Development",
-    description: "Crown Institute for Training & Development",
+    site_name: "London Crown Institute of Training",
+    description: "London Crown Institute of Training",
     url: "https://clinstitute.co.uk/",
     images: [
       {
@@ -34,8 +34,8 @@ export const metadata = {
     ],
   },
   twitter: {
-    site_name: "Crown Institute",
-    description: "Crown Institute for Training & Development",
+    site_name: "London Crown Institute of Training",
+    description: "London Crown Institute of Training",
     url: "https://clinstitute.co.uk/",
     images: [
       {
@@ -46,7 +46,7 @@ export const metadata = {
       },
     ],
     card: "summary_large_image",
-    creator: "Crown Institute",
+    creator: "London Crown Institute of Training",
   },
 };
 

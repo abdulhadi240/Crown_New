@@ -3,6 +3,7 @@ import Header from "@/app/homepage1/components/Header";
 import BlogCarousel from "@/components/BlogCarousel";
 import Wrapper from "@/components/Wrapper";
 import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const BlogPage = async ({ data }) => {
   // Fetch blogs from the backend
@@ -13,69 +14,72 @@ const BlogPage = async ({ data }) => {
     },
   }).then((res) => res.json());
 
+  console.log(data.data.categories, "indiviual");
+
   return (
     <>
       {/* Top header (secondary variant) */}
-      <Header secondary={true} bg={true}/>
+      <Header secondary={true} bg={true} />
 
       {/* Outer container */}
-      <div className="p-4 md:mx-12">
-        
+      <div className="md:p-4 p-1 md:mx-12">
         {/* Image + Decorative Line Container */}
-        <div className="relative flex justify-center w-full p-4">
-          {/* The horizontal line behind the image */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-[300%] h-12 bg-primary md:-mx-12" />
-            {/*
-              - w-[300%]: The line is significantly wider than the container,
-                so its edges are more visible on the sides.
-              - h-16: The line's thickness (4rem). Adjust as you like.
-              - bg-primary: Tailwind color class (replace with your own color if needed).
-            */}
+
+        <div className="relative flex flex-col justify-center  w-full md:p-4 p-1">
+        <div className="mx-auto">
+    <h2 className="text-sm md:mt-14 text-white text-center py-2 px-10 rounded-full bg-secondary border-[1px] border-white">
+      {data.data.categories[0].name}
+    </h2>
+  </div>
+          <div className="md:px-4 py-8 mx-auto max-w-7xl">
+            <div className="flex justify-center">
+              <h1 className="text-lg -mt-6 leading-tight text-primary md:text-4xl font-bold w-full text-center">
+                {data.data.title}
+              </h1>
+            </div>
+            <div className="flex justify-center mt-3">
+              <p className="text-xs md:text-base text-center flex justify-center max-w-[600px]">
+                {data.data.meta_description}
+              </p>
+            </div>
+
           </div>
-          
-          {/* Featured image in front of the line */}
-          <Image
-            src={data.data.featured_image}
-            alt="hero"
-            height={1000}
-            width={1000}
-            className="relative z-10 w-full h-auto rounded-3xl"
-            priority
-          />
+          <div className="mx-auto w-full sm:w-3/4 md:w-[900px]">
+  <Image
+    src={data.data.featured_image}
+    alt="hero"
+    width={900}
+    height={1000}
+    layout="responsive" // Ensures the image scales with its container
+    className="relative z-10 rounded-3xl"
+    priority
+  />
+</div>
         </div>
 
         {/* Blog Content */}
-        <div className="px-4 py-8 mx-auto max-w-7xl">
-          <div className="flex justify-center">
-            <h1 className="text-lg text-primary md:text-2xl font-bold w-full text-center">
-              {data.data.title}
-            </h1> 
-            </div>
-          </div>
 
-          {/* Divider */}
-          <div className="mb-8 h-[1px] w-full text-secondary bg-secondary" />
+        {/* Divider */}
+        <div className="mb-8 h-[1px] w-full text-secondary bg-secondary" />
 
-          {/* Blog HTML content */}
-          <div
-            className="mx-4 md:mx-10 lg:mx-20"
-            dangerouslySetInnerHTML={{ __html: data.data.content }}
-          />
-        </div>
+        {/* Blog HTML content */}
+        <div
+          className="mx-4 md:mx-10 lg:mx-20"
+          dangerouslySetInnerHTML={{ __html: data.data.content }}
+        />
+      </div>
 
-        {/* Latest Blog Section */}
-        <div className="flex justify-center">
-          <h1 className="mt-10 mb-10 text-primary text-center flex justify-center text-3xl font-bold">
+      {/* Latest Blog Section */}
+      <div className="flex justify-center">
+        <h1 className="mt-10 mb-10 text-primary text-center flex justify-center text-3xl font-bold">
           Related Articles You May Find Interesting
-          </h1>
-        </div>
-        <div className="flex flex-col justify-center gap-4 sm:flex-row">
+        </h1>
+      </div>
+      <div className="flex flex-col justify-center gap-4 sm:flex-row">
         <Wrapper>
           <BlogCarousel data={blogs} />
-          </Wrapper>
-        </div>
-      
+        </Wrapper>
+      </div>
     </>
   );
 };

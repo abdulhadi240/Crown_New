@@ -7,6 +7,17 @@
   scroll-behavior: smooth;
 }
 
+@media (min-width: 1440px) {
+  html {
+      zoom: 1.2;
+  }
+}
+
+@media (min-width: 1920px) {
+  html {
+    zoom: 1.5;
+  }
+}
 
 body {
   font-family: Arial, Helvetica, sans-serif;

@@ -9,27 +9,26 @@ export const revalidate = 60; // Revalidate data every 60 seconds
 export const dynamicParams = true;
 
 // Fetch Metadata Dynamically
-export async function generateMetadata({ params }) {
-  const locale = params.locale || "en"; // Fallback to English if no locale is provided
+export async function generateMetadata({params}) {
 
   const product = await fetch(
     `${process.env.BACKEND_URL}/blogs/${params.category}/category`,
     {
       headers: {
         "Content-Type": "application/json",
-        "Accept-Language": locale,
+        "Accept-Language": "en",
       },
     }
   ).then((res) => res.json());
 
   const title =
-    product?.data?.meta_title || "British Academy for Training & Development";
+    product?.data?.meta_title || "London Crown Institute of Training";
   const description =
     product?.data?.meta_description ||
-    "British Academy for Training & Development";
+    "London Crown Institute of Training";
   const keywords =
     product?.data?.meta_keywords ||
-    "British Academy for Training & Development";
+    "London Crown Institute of Training";
 
   return {
     title,
@@ -37,16 +36,15 @@ export async function generateMetadata({ params }) {
     keywords,
     openGraph: {
       type: "website",
-      locale,
-      site_name: "British Academy for Training & Development",
+      site_name: "London Crown Institute of Training",
       description,
-      url: `https://client-academy.vercel.app/blogs/${params.category}/category`,
+      url: `https://clinstitute.co.uk/blogs/${params.category}/category`,
       images: [product?.data?.featured_image || 'https://clinstitute.co.uk/Logocrown.webp'],
     },
     twitter: {
-      site_name: "British Academy for Training & Development",
+      site_name: "London Crown Institute of Training",
       description,
-      url: `https://client-academy.vercel.app/blogs/${params.category}/category`,
+      url: `https://clinstitute.co.uk/blogs/${params.category}/category`,
       images: [
         {
           url: "https://clinstitute.co.uk/Logocrown.webp",
@@ -56,7 +54,7 @@ export async function generateMetadata({ params }) {
         },
       ],
       card: "summary_large_image",
-      creator: "British Acadmey",
+      creator: "London Crown Institute of Training",
     },
   };
 }
@@ -86,14 +84,13 @@ export async function generateStaticParams() {
 
 // Main Page Component with SSR
 export default async function Page({ params }) {
-  const locale = params.locale || "en"; // Determine locale from params
 
   const articles = await fetch(
     `${process.env.BACKEND_URL}/blogs/${params.category}/category?per_page=6&page=1`,
     {
       headers: {
         "Content-Type": "application/json",
-        "Accept-Language": locale,
+        "Accept-Language": "en",
       },
     }
   ).then((res) => res.json());

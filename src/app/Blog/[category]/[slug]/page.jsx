@@ -15,13 +15,13 @@ export async function generateMetadata({ params }) {
   ).then((res) => res.json());
 
   const title =
-    product?.data?.meta_title || "British Academy for Training & Development";
+    product?.data?.meta_title || "London Crown Institute of Training";
   const description =
     product?.data?.meta_description ||
-    "British Academy for Training & Development";
+    "London Crown Institute of Training";
   const keywords =
     product?.data?.meta_keywords ||
-    "British Academy for Training & Development";
+    "London Crown Institute of Training";
 
   return {
     title: title,
@@ -30,25 +30,25 @@ export async function generateMetadata({ params }) {
     openGraph: {
       type: "website",
       locale:`${process.env.LOCALE_LANGUAGE}`,
-      site_name: "British Academy for Training & Development",
-      description: "British Academy for Training & Development",
-      url: `https://client-academy.vercel.app/blogs/${params.slug}`,
-      images: [product?.data[0]?.image || 'https://clinstitute.co.uk/logocrown.webp'],
+      site_name: "London Crown Institute of Training",
+      description: "London Crown Institute of Training",
+      url: `https://clinstitute.co.uk/blogs/${params.slug}`,
+      images: [product?.data[0]?.image || 'https://clinstitute.co.uk/Logocrown.webp'],
     },
     twitter: {
-      site_name: "British Academy for Training & Development",
-      description: "British Academy for Training & Development",
-      url: `https://client-academy.vercel.app/blogs/${params.slug}`,
+      site_name: "London Crown Institute of Training",
+      description: "London Crown Institute of Training",
+      url: `https://clinstitute.co.uk/blogs/${params.slug}`,
       images: [
         {
-          url: "https://clinstitute.co.uk/logocrown.webp",
+          url: "https://clinstitute.co.uk/Logocrown.webp",
           width: 800,
           height: 600,
           alt: "Og Image Alt",
         },
       ],
       card: "summary_large_image",
-      creator: "British Acadmey",
+      creator: "London Crown Institute of Training",
     },
   };
 }

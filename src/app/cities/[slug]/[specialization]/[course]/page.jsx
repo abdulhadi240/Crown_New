@@ -103,34 +103,34 @@ const page = async ({ params }) => {
       <Head>
         <title>
           {data?.data?.meta_title ||
-            "British Academy for Training & Development12"}
+            "London Crown Institute of Training"}
         </title>
         <meta
           name="title"
           content={
             data?.data?.meta_title ||
-            "British Academy for Training & Development"
+            "London Crown Institute of Training"
           }
         />
         <meta
           name="description"
           content={
             data?.data?.meta_description ||
-            "British Academy for Training & Development"
+            "London Crown Institute of Training"
           }
         />
         <meta
           name="keywords"
           content={
             data?.data?.meta_keywords ||
-            "British Academy for Training & Development"
+            "London Crown Institute of Training"
           }
         />
         <meta
           name="author"
           content={
             data?.data?.meta_author ||
-            "British Academy for Training & Development"
+            "London Crown Institute of Training"
           }
         />
         <meta name="robots" content="index, follow" />
@@ -143,7 +143,7 @@ const page = async ({ params }) => {
         />
         <meta
           property="og:image"
-          content={data?.data?.image || "/logobat.webp"}
+          content={data?.data?.image || "https://clinstitute.co.uk/Logocrown.webp"}
         />
         <meta
           property="og:url"
@@ -153,7 +153,7 @@ const page = async ({ params }) => {
           property="og:site_name"
           content={
             data?.data?.site_name ||
-            "British Academy for Training & Development"
+            "London Crown Institute of Training"
           }
         />
         <meta name="twitter:card" content="summary_large_image" />
@@ -164,7 +164,7 @@ const page = async ({ params }) => {
         />
         <meta
           name="twitter:image"
-          content={data?.data?.image || "/logobat.webp"}
+          content={data?.data?.image || "/Logocrown.webp"}
         />
         <meta
           name="twitter:site"
@@ -180,17 +180,17 @@ const page = async ({ params }) => {
               "@type": "WebPage",
               name:
                 data?.data?.meta_title ||
-                "British Academy for Training & Development",
+                "London Crown Institute of Training",
               description:
                 data?.data?.meta_description ||
-                "British Academy for Training & Development",
+                "London Crown Institute of Training",
               url: data?.data?.meta_url || `https://clinstitute.co.uk/cities`,
-              image: data?.data?.image || "//logobat.webp",
+              image: data?.data?.image || "https://clinstitute.co.uk/Logocrown.webp",
               author: {
                 "@type": "Person",
                 name:
                   data?.meta_author ||
-                  "British Academy for Training & Development",
+                  "London Crown Institute of Training",
               },
             }),
           }}

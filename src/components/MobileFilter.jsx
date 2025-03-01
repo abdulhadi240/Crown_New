@@ -50,7 +50,7 @@ export default function SearchForm({ cities, specialization }) {
   };
 
   return (
-    <div className="absolute mt-10  md:-bottom-56 md:right-20 md:w-[500px] w-full bg-white rounded-lg shadow-2xl p-6 border border-gray-300">
+    <div className="absolute mt-10  md:top-10 md:right-20 md:w-[500px] w-full bg-white rounded-lg shadow-2xl p-6 border border-gray-300">
       {/* Search Bar */}
       <div className="flex items-center bg-gray-100 border border-[#E5C17C] rounded-lg md:px-4 px-2 md:py-3 w-full">
         <input

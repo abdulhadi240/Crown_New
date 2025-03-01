@@ -55,7 +55,7 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: data?.data?.meta_title || "Crown Academy for Training & Development",
+    title: data?.data?.meta_title || "London Crown Institute of Training",
     description: data?.data?.meta_description || "Explore top courses, programs, and specializations.",
     keywords: data?.data?.meta_keywords || "training, courses, programs, specialization",
     alternates: {

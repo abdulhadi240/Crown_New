@@ -135,7 +135,7 @@ const Specialization = ({
         "url": `https://clinstitute.co.uk/${params || "default-category"}/${(course?.available_cities?.[0]?.slug) || "default-city"}/${course?.slug || "default-course"}`,
         "provider": {
           "@type": "Organization",
-          "name": "Crown Academy",
+          "name": "London Crown Institute of Training",
           "sameAs": "https://clinstitute.co.uk/"
         },
         "image": {

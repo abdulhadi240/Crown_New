@@ -25,20 +25,20 @@ export async function generateMetadata({ params }) {
   const metaData = res?.data?.[0] || {};
 
   return {
-    title: metaData.meta_title || "Crown Academy for Training & Development",
+    title: metaData.meta_title || "London Crown Institute of Training",
     description:
       metaData.meta_description ||
       "Explore courses offered by city at Crown Academy  for Training & Development.",
     keywords: metaData.meta_keywords || "training, courses, cities, education",
     alternates: {
-      canonical: `https://clinstitute.co.uk/${slug}`,
+      canonical: `https://clinstitute.co.uk/cities`,
     },
     openGraph: {
-      title: metaData.meta_title || "Crown Academy for Training & Development",
+      title: metaData.meta_title || "London Crown Institute of Training",
       description:
         metaData.meta_description ||
         "Explore courses offered by city at Crown Academy  for Training & Development.",
-      url: `https://clinstitute.co.uk/${slug}`,
+      url: `https://clinstitute.co.uk/cities`,
       images: [
         {
           url: metaData.image || "https://clinstitute.co.uk/Logocrown.webp",
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary_large_image",
-      title: metaData.meta_title || "Crown Academy for Training & Development",
+      title: metaData.meta_title || "London Crown Institute of Training",
       description:
         metaData.meta_description ||
         "Explore courses offered by city at Crown Academy  for Training & Development.",

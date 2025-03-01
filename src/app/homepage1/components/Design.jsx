@@ -49,7 +49,7 @@ const Design = ({
           {image_height && (
             <div>
               <svg
-                className="absolute bottom-0 w-full"
+                className="hidden md:absolute bottom-0 w-full"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 1440 250"
               >

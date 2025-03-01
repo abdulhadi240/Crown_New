@@ -34,7 +34,7 @@ const Details1 = ({ course }) => {
     "educationalCredentialAwarded": course?.category || "Engineering", // Use this field for course category or educational credential
     "provider": {
       "@type": "Organization",
-      "name": "Crown Academy",
+      "name": "London Crown Institute of Training",
       "sameAs": "https://clinstitute.co.uk/"
     },
     "image": {
@@ -97,8 +97,8 @@ const Details1 = ({ course }) => {
       <div className="md:mx-10 mx-2">
         {/* Sticky Title and Register Button */}
         <div className="sticky md:hidden top-0 bg-white">
-          <div className="flex justify-between mt-6">
-            <h2 className="text-lg w-56 text-gray-900 mt-1 font-medium ">
+          <div className="flex justify-between mx-3 mt-6 items-center">
+            <h2 className="text-lg max-w-44 text-gray-900 mt-1 font-medium ">
               {course.title}
             </h2>
             <Link
@@ -210,7 +210,7 @@ const Details1 = ({ course }) => {
                     <h3 className="text-base my-6 font-bold text-primary mb-2">
                       Price
                     </h3>
-                    <p className="text-base text-primary">${course.price}</p>
+                    <p className="text-base text-primary">£ {course.price}</p>
                   </div>
                 </div>
               </div>
@@ -254,7 +254,7 @@ const Details1 = ({ course }) => {
             </div>
           </div>
           <div className="hidden md:block">
-            <div className="md:sticky md:text-base md:top-24 md:w-[350px] md:h-auto md:p-5 bg-white border border-gray-300 md:rounded-lg md:shadow-md transition-all md:duration-300">
+            <div className="md:sticky mt-9 md:text-base md:top-24 md:w-[350px] md:h-auto md:p-5 bg-white border border-gray-300 md:rounded-lg md:shadow-md transition-all md:duration-300">
               <h1 className="text-xl font-semibold text-gray-800">
                 {course.title}
               </h1>
@@ -299,7 +299,7 @@ const Details1 = ({ course }) => {
               <div className="mt-4 flex justify-between">
                 <h3 className="text-md font-medium text-primary">Price</h3>
                 <p className="text-lg font-semibold text-gray-900">
-                  ${course.price}
+                £ {course.price}
                 </p>
               </div>
 

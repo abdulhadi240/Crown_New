@@ -37,7 +37,7 @@ const Header = ({ secondary, icon_white, bg }) => {
     "@context": "https://schema.org",
     "@type": "SiteNavigationElement",
     "@id": "https://clinstitute.co.uk/#site-navigation",
-    "name": "Crown London Institute",
+    "name": "London Crown Institute of Training",
     "url": "https://clinstitute.co.uk",
     "hasPart": menu.map((item) => ({
       "@type": "SiteNavigationElement",
@@ -72,7 +72,7 @@ const Header = ({ secondary, icon_white, bg }) => {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": "https://clinstitute.co.uk/#organization",
-    "name": "Crown London Institute",
+    "name": "London Crown Institute of Training",
     "url": "https://clinstitute.co.uk",
     "logo": "/logocrown.webp",
     "sameAs": [
@@ -134,7 +134,8 @@ const Header = ({ secondary, icon_white, bg }) => {
             <Link href="/">
               <Image
                 src={"/logo13.png"}
-                alt="Crown London Institute logo"
+                alt="London Crown Institute of Training
+ logo"
                 width={120}
                 height={120}
                 priority

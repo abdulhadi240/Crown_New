@@ -4,7 +4,10 @@ import MobileFilter from "../components/MobileFilter";
 import fetchData from "@/actions/server";
 import Design from "./homepage1/components/Design";
 import Latest_course from "@/components/Latest_course";
+import ScrollingTestimonials from "@/components/Testimonials";
 import Testimonials from "@/components/Testimonials";
+import CourseCarousel from "@/components/CourseCarasoul";
+import Wrapper from "@/components/Wrapper";
 
 // Dynamically imported components
 const SpecializationSection = dynamic(() =>
@@ -29,7 +32,7 @@ const Page = async () => {
     "https://backendbatd.clinstitute.co.uk/api/specializations"
   );
   const courses = await fetchData(
-    "https://backendbatd.clinstitute.co.uk/api/courses?per_page=4&page=1"
+    "https://backendbatd.clinstitute.co.uk/api/courses"
   );
 
   return (
@@ -64,7 +67,9 @@ const Page = async () => {
       </div>
       <div>
         <SectionTitle title="Latest" highlight="Courses" />
-        <Latest_course courses={courses.data} />
+        <Wrapper>
+        <CourseCarousel courses={courses.data} />
+        </Wrapper>
       </div>
 
       {/* Courses by Cities Carousel */}

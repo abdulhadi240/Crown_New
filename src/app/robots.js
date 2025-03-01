@@ -3,8 +3,8 @@ export default function robots() {
       rules: {
         userAgent: '*',
         allow: '/',
-        disallow: '/private/',
+        disallow: '/register',
       },
-      sitemap: 'https://acme.com/sitemap.xml',
+      sitemap: 'https://clinstitute.co.uk/sitemap.xml',
     }
   }

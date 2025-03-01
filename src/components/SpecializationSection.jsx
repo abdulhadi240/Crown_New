@@ -40,7 +40,7 @@ const SpecializationSection = ({ data }) => {
       selectedSpec.courses.map((course) => (
         <Link
           key={course.id}
-          href={`/${course.available_cities[0].slug}/${course.specialization_slug}/${course.slug}`}
+          href={`/${course.specialization_slug}/${course.slug}`}
           passHref
           className="mt-2 text-gray-700 text-sm font-light relative p-4 rounded-lg transition-all ease-in-out duration-300 hover:text-primary hover:shadow-lg"
         >
