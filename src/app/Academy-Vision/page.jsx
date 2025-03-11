@@ -6,8 +6,38 @@ import { LuBadgeCheck } from "react-icons/lu";
 import { FaHandshake } from "react-icons/fa";
 import { FaBookOpen } from "react-icons/fa";
 import Design from "../homepage1/components/Design";
+
+export async function generateMetadata() {
+  return {
+    title: "Academy Vision - London Crown insttitute of trainig",
+    description:
+      "At Crown London Institute, we empower professionals with cutting-edge training programs that transform futures. Discover our mission and vision.",
+    openGraph: {
+      title: "Academy Vision- London Crown insttitute of trainig",
+      description:
+        "At Crown London Institute, we empower professionals with cutting-edge training programs that transform futures. Discover our mission and vision.",
+      url: "https://clinstitute.co.uk//about", // Update with your domain or page URL
+      type: "website",
+      images: [
+        {
+          url: "/Logocrown.webp", // Update with an appropriate image URL
+          width: 800,
+          height: 600,
+          alt: "Crown London Institute",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Academy Vision - London Crown insttitute of trainig",
+      description:
+        "At Crown London Institute, we empower professionals with cutting-edge training programs that transform futures. Discover our mission and vision.",
+    },
+  };
+}
 const page = () => {
   return (
+    
     <div className="mb-10">
     <Design  iamge={'/consulting.webp'} search>
     <div className="w-screen">

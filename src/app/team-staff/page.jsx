@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 import Design from "../homepage1/components/Design";
+import Head from "next/head";
 
 const teamMembers = [
   {
@@ -110,7 +111,19 @@ export default function TeamStaff({ params }) {
   const isArabic = locale === "ar";
 
   return (
-    <>
+    <>    <Head>
+    <title>Team Staff - London Crown Institute of Training</title>
+    <meta
+      name="description"
+      content="At Crown London Institute, we're committed to assisting you at every stage. Fill out the form to contact us with any inquiries about our courses or services."
+    />
+    <meta property="og:title" content="Team Staff - London Crown Institute of Training" />
+    <meta
+      property="og:description"
+      content="At Crown London Institute, we're committed to assisting you at every stage. Fill out the form to contact us with any inquiries about our courses or services."
+    />
+    {/* Add more meta tags as needed */}
+  </Head>
             <Design  iamge={'/consulting.webp'} search>
     <div className="w-screen">
     <h1 className=" text-center mt-5 text-4xl items-center font-semibold text-white md:text-[55px] md:leading-[60px]">

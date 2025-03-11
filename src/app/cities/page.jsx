@@ -67,7 +67,7 @@ const Page = async () => {
       "Content-Type": "application/json",
       "Accept-Language": `${process.env.LOCALE_LANGUAGE}`,
     },
-    revalidate: 100,
+    next: { revalidate: 60 },
   });
 
   const res = await data.json();

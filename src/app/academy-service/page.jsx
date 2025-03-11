@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Link from 'next/link';
 import Design from '../homepage1/components/Design';
+import Head from 'next/head';
 
 const translations = {
   en: {
@@ -337,57 +338,67 @@ export default function AcademyService({ params }) {
   const isRTL = locale === 'ar';
 
   return (
-    <div>
-    <Design secondary={true} bg={true}></Design>
-    <div className="bg-[#0A1828] py-8">
-        <h1 className="text-center md:mt-10 md:pt-6 text-3xl font-bold text-white">Academy Services</h1>
-      </div>
-      <div className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="all" className="mb-12">
-          <TabsList className="grid w-full grid-cols-3 mb-8">
-            <TabsTrigger value="all">{t.tabs.all}</TabsTrigger>
-            <TabsTrigger value="academic">{t.tabs.academic}</TabsTrigger>
-            <TabsTrigger value="support">{t.tabs.support}</TabsTrigger>
-          </TabsList>
-          <TabsContent value="all">
-            <ServiceCards services={t.services.slice(0, 6)} isRTL={isRTL} />
-          </TabsContent>
-          <TabsContent value="academic">
-            <ServiceCards services={t.services.slice(6, 12)} isRTL={isRTL} />
-          </TabsContent>
-          <TabsContent value="support">
-            <ServiceCards services={t.services.slice(12,18)} isRTL={isRTL} />
-          </TabsContent>
-        </Tabs>
+    <><Head>
+      <title>Academy Services - London Crown Institute of Training</title>
+      <meta
+        name="description"
+        content="At Crown London Institute, we're committed to assisting you at every stage. Fill out the form to contact us with any inquiries about our courses or services." />
+      <meta property="og:title" content="Academy Services - London Crown Institute of Training" />
+      <meta
+        property="og:description"
+        content="At Crown London Institute, we're committed to assisting you at every stage. Fill out the form to contact us with any inquiries about our courses or services." />
+      {/* Add more meta tags as needed */}
+    </Head><div>
+        <Design secondary={true} bg={true}></Design>
+        <div className="bg-[#0A1828] py-8">
+          <h1 className="text-center md:mt-10 md:pt-6 text-3xl font-bold text-white">Academy Services</h1>
+        </div>
+        <div className="container mx-auto px-4 py-8">
+          <Tabs defaultValue="all" className="mb-12">
+            <TabsList className="grid w-full grid-cols-3 mb-8">
+              <TabsTrigger value="all">{t.tabs.all}</TabsTrigger>
+              <TabsTrigger value="academic">{t.tabs.academic}</TabsTrigger>
+              <TabsTrigger value="support">{t.tabs.support}</TabsTrigger>
+            </TabsList>
+            <TabsContent value="all">
+              <ServiceCards services={t.services.slice(0, 6)} isRTL={isRTL} />
+            </TabsContent>
+            <TabsContent value="academic">
+              <ServiceCards services={t.services.slice(6, 12)} isRTL={isRTL} />
+            </TabsContent>
+            <TabsContent value="support">
+              <ServiceCards services={t.services.slice(12, 18)} isRTL={isRTL} />
+            </TabsContent>
+          </Tabs>
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-center mb-6">{t.whyChooseUs}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {t.reasons.map((reason, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <CardTitle className='text-primary text-xl'>{reason.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className='text-base'>{reason.content}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-center mb-6">{t.whyChooseUs}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {t.reasons.map((reason, index) => (
+                <Card key={index}>
+                  <CardHeader>
+                    <CardTitle className='text-primary text-xl'>{reason.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className='text-base'>{reason.content}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
 
-        <section className="text-center">
-          <h2 className="text-3xl font-bold mb-6 text-primary ">{t.getStarted}</h2>
-          <p className="mb-8 max-w-2xl mx-auto text-base">{t.description}</p>
-          <Link
-            href={`/consulting-services`}
-            className="text-white text-sm bg-secondary p-2 rounded-sm"
-          >
-            {t.schedule}
-          </Link>
-        </section>
-      </div>
-    </div>
+          <section className="text-center">
+            <h2 className="text-3xl font-bold mb-6 text-primary ">{t.getStarted}</h2>
+            <p className="mb-8 max-w-2xl mx-auto text-base">{t.description}</p>
+            <Link
+              href={`/consulting-services`}
+              className="text-white text-sm bg-secondary p-2 rounded-sm"
+            >
+              {t.schedule}
+            </Link>
+          </section>
+        </div>
+      </div></>
   );
 }
 

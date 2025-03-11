@@ -19,34 +19,47 @@ async function fetchSpecializationData() {
   return fetchData(`${process.env.BACKEND_URL}/specializations`);
 }
 
+async function fetchSpecializationDetail(slug) {
+  return fetchData(`${process.env.BACKEND_URL}/specializations/${slug}`);
+}
+
 async function fetchProgramData() {
   return fetchData(`${process.env.BACKEND_URL}/programs`);
 }
 
 async function fetchCityCourses(slug) {
-  return fetchData(`${process.env.BACKEND_URL}/courses/${slug}/cities?per_page=10&page=1`);
+  return fetchData(`${process.env.BACKEND_URL}/courses/${slug}/cities?per_page=50&page=1`);
 }
 
 async function fetchProgramCourses(slug) {
-  return fetchData(`${process.env.BACKEND_URL}/courses?program=${slug}&per_page=10&page=1`);
+  return fetchData(`${process.env.BACKEND_URL}/courses?program=${slug}&per_page=50&page=1`);
 }
 
 async function fetchCategoryData() {
   return fetchData(`${process.env.BACKEND_URL}/categories`);
 }
 
+async function fetchProgram(slug) {
+  return fetchData(`${process.env.BACKEND_URL}/programs/${slug}`);
+}
+
+async function fetchCity(slug) {
+  return fetchData(`${process.env.BACKEND_URL}/cities/${slug}`);
+}
+
+
 export async function generateMetadata({ params }) {
   const { slug } = params;
 
   // Fetch details for city, specialization, or program
-  const [cityCourses, specializationCourses, programCourses] = await Promise.all([
-    fetchCityCourses(slug),
-    fetchSpecializationData(),
-    fetchProgramCourses(slug),
+  const [cityCourses, specializationCourses , fetchPrograms] = await Promise.all([
+    fetchCity(slug),
+    fetchSpecializationDetail(slug),
+    fetchProgram(slug),
   ]);
-
-  const data = cityCourses || specializationCourses || programCourses;
-
+  
+  const data = cityCourses || specializationCourses || fetchPrograms;
+  
   if (!data) {
     return {
       title: "Page Not Found",
@@ -55,7 +68,7 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: data?.data?.meta_title || "London Crown Institute of Training",
+    title:  `${data?.data?.meta_title || data.name} - London Crown Institute Of Training`,
     description: data?.data?.meta_description || "Explore top courses, programs, and specializations.",
     keywords: data?.data?.meta_keywords || "training, courses, programs, specialization",
     alternates: {
@@ -67,7 +80,7 @@ export async function generateMetadata({ params }) {
       url: `https://clinstitute.co.uk/${slug}`,
       images: [
         {
-          url: data?.data?.image || "https://clinstitute.co.uk/logocrown.webp",
+          url: data?.data?.image || "/Logocrown.webp",
           width: 800,
           height: 600,
           alt: data?.data?.meta_title || "Course Image",
@@ -79,7 +92,7 @@ export async function generateMetadata({ params }) {
       card: "summary_large_image",
       title: data?.data?.meta_title,
       description: data?.data?.meta_description,
-      images: [data?.data?.image || "https://clinstitute.co.uk/logocrown.webp"],
+      images: [data?.data?.image || "/Logocrown.webp"],
     },
   };
 }
@@ -101,7 +114,8 @@ export default async function Page({ params }) {
 
     const category = await GetAllCategory().catch(() => []);
     const specialization_courses = await GetSpecificSpecialization(slug).catch(() => []);
-    
+    const city_detail = await fetchData(`${process.env.BACKEND_URL}/cities/${params.slug}`);
+
     const city = cityData?.data?.find((c) => c.slug === slug);
     const specialization = specializationData?.data?.find((s) => s.slug === slug);
     const program = programs?.data?.find((p) => p.slug === slug);
@@ -117,7 +131,7 @@ export default async function Page({ params }) {
     return (
       <>
         {type === "city" ? (
-          <City check_city_courses cities params={slug} data={data} city={cityData} specialization={specializationData} SpecializationCategory={SpecializationCategory} category={categoryData}/>
+          <City details={city_detail} check_city_courses cities params={slug} data={data || []} city={cityData} specialization={specializationData} SpecializationCategory={SpecializationCategory} category={categoryData}/>
         ) : type === "specialization" ? (
           <Specialization params={slug} data={data} city={cityData} specialization={specializationData} SpecializationCategory={SpecializationCategory} category={categoryData}/>
         ) : (

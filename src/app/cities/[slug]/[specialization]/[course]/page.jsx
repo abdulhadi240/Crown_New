@@ -6,6 +6,7 @@ import Design from "@/app/homepage1/components/Design";
 import Details1 from "@/app/[slug]/components/Details1";
 import BlogCarousel from "@/components/BlogCarousel";
 import Wrapper from "@/components/Wrapper";
+import NotFound from "@/app/not-found";
 
 export const dynamic = "force-dynamic";
 
@@ -90,6 +91,10 @@ const page = async ({ params }) => {
 
   const courses = course1?.data?.find((c) => c.slug === course);
   const blogs = blog?.data?.find((s) => s.slug === course);
+
+  if (!courses && !blogs) {
+    return <NotFound />;
+  }
 
   const course_carasoul = await fetchData(`${process.env.BACKEND_URL}/courses`);
 

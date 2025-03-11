@@ -21,10 +21,19 @@ const Details1 = ({ course }) => {
 
   const getRegisterLink = () => {
     if (selectedDate || selectedCity) {
-      return `/register?course=${course.slug}&date=${selectedDate}&city=${selectedCity}`;
+      return `/register?course=${course.slug}&date=${customDate||selectedDate}&city=${selectedCity}`;
     }
     return `/register?course=${course.slug}`;
   };
+
+  function formatCityName(city) {
+    if (!city) return "Select a City";
+    return city
+      .split("-")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+  }
+
 
   const jsonLdData = {
     "@context": "https://schema.org",
@@ -291,7 +300,7 @@ const Details1 = ({ course }) => {
               <div className="mt-4 flex justify-between">
                 <h3 className="text-md font-medium text-primary">City</h3>
                 <p className="text-sm text-gray-600">
-                  {selectedCity || "Select a City"}
+                  {formatCityName(selectedCity)}
                 </p>
               </div>
 

@@ -15,7 +15,7 @@ const BlogPostCarousel = ({ data }) => {
               >
                 <div className="h-24 w-full">
                   <Image
-                    src={post.image}
+                    src={post.icon}
                     width={200}
                     height={200}
                     alt={post.name}

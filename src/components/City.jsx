@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import SectionTitle from "./SectionTitle";
 import SectionTitle1 from "./SectionTitle1";
 const City = ({
+  details,
   SpecializationCategory,
   params,
   data,
@@ -177,7 +178,7 @@ const City = ({
       />
       <Design
         icon_white
-        iamge={"/image_consult.png"}
+        iamge={details.data.image}
         center
         input={false}
         image_height={false}
@@ -186,7 +187,7 @@ const City = ({
       >
         <div>
           <SectionTitle1
-            title="Courses By"
+            title="Training Courses in"
             highlight={slug
               .replace(/[-_]/g, " ") // Replace hyphens and underscores with spaces
               .split(" ") // Split the string into an array of words

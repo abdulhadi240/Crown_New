@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, Mail } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import Design from "../homepage1/components/Design";
+import Head from "next/head";
 
 export default function ContactPage() {
   const { toast } = useToast();
@@ -78,7 +79,19 @@ export default function ContactPage() {
   };
 
   return (
-    <>
+    <><Head>
+    <title>Contact Us - London Crown Institute of Training</title>
+    <meta
+      name="description"
+      content="At Crown London Institute, we're committed to assisting you at every stage. Fill out the form to contact us with any inquiries about our courses or services."
+    />
+    <meta property="og:title" content="Contact Us - London Crown Institute of Training" />
+    <meta
+      property="og:description"
+      content="At Crown London Institute, we're committed to assisting you at every stage. Fill out the form to contact us with any inquiries about our courses or services."
+    />
+    {/* Add more meta tags as needed */}
+  </Head>
       <Design secondary bg></Design>
       <div className="relative">
         <div className="bg-[#0A1828] py-4">

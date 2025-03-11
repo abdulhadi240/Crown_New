@@ -74,14 +74,11 @@ export default function Contacts() {
           link="https://api.whatsapp.com/send/?phone=%2B442035827999&text&type=phone_number&app_absent=0"
         >
           <div className="text-sm text-gray-600">
-           {/*  <ul>
+             <ul>
               <li>
-                {locale === "ar" ? "واتساب (EN):" : "WhatsApp (EN):"} 00442035827999
+                {locale === "ar" ? "واتساب (EN):" : "WhatsApp (EN):"} +447366513577
               </li>
-              <li>
-                {locale === "ar" ? "واتساب (AR):" : "WhatsApp (AR):"} 00447724022466
-              </li>
-            </ul>*/}
+            </ul>
           </div>
         </ContactCard>
 
@@ -95,10 +92,9 @@ export default function Contacts() {
           link="./"
         >
           <div className="text-sm text-gray-600">
-           {/*  <ul>
-              <li>{locale === "ar" ? "الهاتف المتحرك" : "Mobile"}: 442035827999</li>
-              <li>{locale === "ar" ? "الخط الأرضي" : "Landline"}: 00442036036593</li>
-            </ul>*/}
+             <ul>
+              <li>{locale === "ar" ? "الهاتف المتحرك" : "Mobile"}: +447366513577</li>
+            </ul>
           </div>
         </ContactCard>
 

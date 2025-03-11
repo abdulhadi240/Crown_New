@@ -48,7 +48,7 @@ const Page = async () => {
           Advancing employee skills and driving business growth through tailored
           training programs for companies worldwide.
         </p>
-        <div className="">
+        <div className="mx-4 mb-4 md:mx-0 md:mb-0">
           <MobileFilter
             cities={cities_all.data}
             specialization={specialization_list.data}
@@ -58,8 +58,8 @@ const Page = async () => {
 
       {/* Specialization Section */}
       <SectionTitle
-        title="Take Your"
-        highlight="First Step Towards Achieving 
+        title="Take Your First Step Towards"
+        highlight=" Achieving 
       Professional Goals"
       />
       <div className="md:mx-20">

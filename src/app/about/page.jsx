@@ -7,6 +7,34 @@ import Link from "next/link";
 import Hero from "./components/Hero";
 import Design from "../homepage1/components/Design";
 
+export async function generateMetadata() {
+  return {
+    title: "About us - London Crown insttitute of trainig",
+    description:
+      "At Crown London Institute, we empower professionals with cutting-edge training programs that transform futures. Discover our mission and vision.",
+    openGraph: {
+      title: "About us - London Crown insttitute of trainig",
+      description:
+        "At Crown London Institute, we empower professionals with cutting-edge training programs that transform futures. Discover our mission and vision.",
+      url: "https://clinstitute.co.uk//about", // Update with your domain or page URL
+      type: "website",
+      images: [
+        {
+          url: "/Logocrown.webp", // Update with an appropriate image URL
+          width: 800,
+          height: 600,
+          alt: "Crown London Institute",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "About us - London Crown insttitute of trainig",
+      description:
+        "At Crown London Institute, we empower professionals with cutting-edge training programs that transform futures. Discover our mission and vision.",
+    },
+  };
+}
 
 const benefits = [
   {
@@ -51,6 +79,7 @@ const team = [
 export default function ConsultingPage({params}) {  
   return (
     <>
+
       <Design secondary bg></Design>
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-base">
         {/* Header Section */}

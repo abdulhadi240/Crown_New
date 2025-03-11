@@ -27,8 +27,8 @@ const Design = ({
             search_height
               ? "h-[400px]"
               : image_height
-              ? "h-[700px]"
-              : "md:h-[400px] h-[300px]"
+              ? "min-h-[550px]"
+              : "md:h-[400px] h-[400px]"
           } overflow-hidden`}
         >
           {/* Background Image */}

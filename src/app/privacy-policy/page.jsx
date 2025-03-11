@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import Design from "../homepage1/components/Design";
+import Head from "next/head";
 
 const sections = [
   {
@@ -145,6 +146,19 @@ export default function PrivacyPolicy() {
 
   return (
     <>
+    <Head>
+    <title>Privacy Policy - London Crown Institute of Training</title>
+    <meta
+      name="description"
+      content="At Crown London Institute, we're committed to assisting you at every stage. Fill out the form to contact us with any inquiries about our courses or services."
+    />
+    <meta property="og:title" content="Privacy Policy - London Crown Institute of Training" />
+    <meta
+      property="og:description"
+      content="At Crown London Institute, we're committed to assisting you at every stage. Fill out the form to contact us with any inquiries about our courses or services."
+    />
+    {/* Add more meta tags as needed */}
+  </Head>
       <Design secondary bg={true} />
       <div className="bg-[#0A1828] py-4">
         <h1 className="text-center md:mt-10 md:pt-6 text-3xl items-center font-bold text-white">

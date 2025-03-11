@@ -60,105 +60,108 @@ function RequestCourse({ cities, categories }) {
   };
 
   return (
-    <Wrapper>
-      <div className="flex flex-col md:flex-row justify-center items-center mx-auto  gap-10 md:gap-32 p-4 md:p-6">
-        <div className="text-center md:text-left max-w-md">
-          <h1 className="text-2xl md:text-5xl font-bold text-[#fcc839]">
-            Request a Course
-          </h1>
-          <p className="text-gray-100 text-sm mt-6 md:text-base w-full md:max-w-80 mt-1">
-            Get in touch with us to arrange a customized course tailored to your needs.
-          </p>
-        </div>
+    <Wrapper full>
+      {/* Main container with max-width to prevent spreading too wide on large screens */}
+      <div className="md:container mx-auto max-w-6xl px-4">
+        <div className="flex flex-col md:flex-row items-center justify-center md:gap-32 md:py-10 ">  
+          <div className="text-center md:text-left w-full md:w-1/2 lg:w-1/3 pb-6 md:pb-0">
+            <h1 className="text-2xl md:text-5xl font-bold text-[#fcc839]">
+              Request a Course
+            </h1>
+            <p className="text-gray-100 text-sm mt-2 md:text-base">
+              Get in touch with us to arrange a customized course tailored to your needs.
+            </p>
+          </div>
 
-        <div className="bg-white w-full max-w-md rounded-lg p-6 shadow-md border border-gray-200">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div>
-              <label className="text-gray-700 text-sm font-medium">Full Name</label>
-              <input
-                {...register("fullName")}
-                type="text"
-                placeholder="Enter your full name"
-                className="w-full mt-1 px-3 py-2 text-primary rounded border border-secondary focus:ring-2 focus:ring-amber-400 focus:outline-none transition text-sm"
-              />
-              {errors.fullName && <p className="text-red-500 text-xs text-start mt-1">{errors.fullName.message}</p>}
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-white w-full md:w-1/2 lg:w-1/3 rounded-lg p-6 shadow-md border border-gray-200">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div>
-                <label className="text-gray-700 text-sm font-medium">Email</label>
+                <label className="text-gray-700 text-sm font-medium">Full Name</label>
                 <input
-                  {...register("email")}
-                  type="email"
-                  placeholder="Enter your email"
+                  {...register("fullName")}
+                  type="text"
+                  placeholder="Enter your full name"
                   className="w-full mt-1 px-3 py-2 text-primary rounded border border-secondary focus:ring-2 focus:ring-amber-400 focus:outline-none transition text-sm"
                 />
-                {errors.email && <p className="text-red-500 text-start text-xs mt-1">{errors.email.message}</p>}
+                {errors.fullName && <p className="text-red-500 text-xs text-start mt-1">{errors.fullName.message}</p>}
               </div>
-              
-              <div>
-                <label className="text-gray-700 text-sm font-medium">Mobile Number</label>
-                <input
-                  {...register("mobile")}
-                  type="tel"
-                  placeholder="Enter your mobile number"
-                  className="w-full mt-1 px-3 py-2 text-primary rounded border border-secondary focus:ring-2 focus:ring-amber-400 focus:outline-none transition text-sm"
-                />
-                {errors.mobile && <p className="text-red-500 text-start text-xs mt-1">{errors.mobile.message}</p>}
-              </div>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-gray-700 text-sm font-medium">Email</label>
+                  <input
+                    {...register("email")}
+                    type="email"
+                    placeholder="Enter your email"
+                    className="w-full mt-1 px-3 py-2 text-primary rounded border border-secondary focus:ring-2 focus:ring-amber-400 focus:outline-none transition text-sm"
+                  />
+                  {errors.email && <p className="text-red-500 text-start text-xs mt-1">{errors.email.message}</p>}
+                </div>
+                
+                <div>
+                  <label className="text-gray-700 text-sm font-medium">Mobile Number</label>
+                  <input
+                    {...register("mobile")}
+                    type="tel"
+                    placeholder="Enter your mobile number"
+                    className="w-full mt-1 px-3 py-2 text-primary rounded border border-secondary focus:ring-2 focus:ring-amber-400 focus:outline-none transition text-sm"
+                  />
+                  {errors.mobile && <p className="text-red-500 text-start text-xs mt-1">{errors.mobile.message}</p>}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-gray-700 text-sm font-medium">Category</label>
+                  <select
+                    {...register("category")}
+                    className="w-full mt-1 px-3 py-2 text-primary rounded border border-secondary focus:ring-2 focus:ring-amber-400 focus:outline-none transition bg-white appearance-none text-sm"
+                  >
+                    <option value="">Select a category</option>
+                    {categories && categories.map((category) => (
+                      <option key={category.id} value={category.id}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.category && <p className="text-red-500 text-start text-xs mt-1">{errors.category.message}</p>}
+                </div>
+                
+                <div>
+                  <label className="text-gray-700 text-sm font-medium">City</label>
+                  <select
+                    {...register("city")}
+                    className="w-full mt-1 px-3 py-2 text-primary rounded border border-secondary focus:ring-2 focus:ring-amber-400 focus:outline-none transition bg-white appearance-none text-sm"
+                  >
+                    <option value="">Select a city</option>
+                    {cities && cities.map((city) => (
+                      <option key={city.id} value={city.id}>
+                        {city.name}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.city && <p className="text-red-500 text-start text-xs mt-1">{errors.city.message}</p>}
+                </div>
+              </div>
+
               <div>
-                <label className="text-gray-700 text-sm font-medium">Category</label>
-                <select
-                  {...register("category")}
-                  className="w-full mt-1 px-3 py-2 text-primary rounded border border-secondary focus:ring-2 focus:ring-amber-400 focus:outline-none transition bg-white appearance-none text-sm"
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-secondary text-white font-medium py-2 px-4 rounded-md hover:bg-amber-600 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                 >
-                  <option value="">Select a category</option>
-                  {categories.map((category) => (
-                    <option key={category.value} value={category.id}>
-                      {category.name}
-                    </option>
-                  ))}
-                </select>
-                {errors.category && <p className="text-red-500 text-start text-xs mt-1">{errors.category.message}</p>}
+                  {isSubmitting ? "Processing..." : "Send Request"}
+                </button>
               </div>
-              
-              <div>
-                <label className="text-gray-700 text-sm font-medium">City</label>
-                <select
-                  {...register("city")}
-                  className="w-full mt-1 px-3 py-2 text-primary rounded border border-secondary focus:ring-2 focus:ring-amber-400 focus:outline-none transition bg-white appearance-none text-sm"
-                >
-                  <option value="">Select a city</option>
-                  {cities.map((city) => (
-                    <option key={city.value} value={city.id}>
-                      {city.name}
-                    </option>
-                  ))}
-                </select>
-                {errors.city && <p className="text-red-500 text-start text-xs mt-1">{errors.city.message}</p>}
+            </form>
+
+            {/* Success message */}
+            {successMessage && (
+              <div className="mt-4 text-xs text-primary text-start font-semibold">
+                {successMessage}
               </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-secondary text-white font-medium py-2 px-4 rounded-md hover:bg-amber-600 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-              >
-                {isSubmitting ? "Processing..." : "Send Request"}
-              </button>
-            </div>
-          </form>
-
-          {/* Success message */}
-          {successMessage && (
-            <div className="mt-4 text-xs text-primary text-start font-semibold">
-              {successMessage}
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </Wrapper>
