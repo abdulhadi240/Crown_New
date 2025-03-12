@@ -1,9 +1,0 @@
-[33md28825b[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/frontend[m[33m)[m HEAD@{0}: checkout: moving from frontend to remotes/origin/frontend
-[33m5d914f0[m[33m ([m[1;32mmain[m[33m, [m[1;32mfrontend[m[33m)[m HEAD@{1}: reset: moving to 5d914f0
-[33md9884a9[m HEAD@{2}: reset: moving to HEAD~1
-[33md28825b[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/frontend[m[33m)[m HEAD@{3}: checkout: moving from main to frontend
-[33m5d914f0[m[33m ([m[1;32mmain[m[33m, [m[1;32mfrontend[m[33m)[m HEAD@{4}: commit: Meta isuue solved , Favicon icon changed
-[33m2f09e60[m HEAD@{5}: commit: new changes
-[33mbb35168[m HEAD@{6}: commit: complete code
-[33mb939cd5[m HEAD@{7}: commit: changes
-[33m79c2ae5[m HEAD@{8}: clone: from https://github.com/abdulhadi240/crown.git
