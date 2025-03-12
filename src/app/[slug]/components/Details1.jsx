@@ -3,9 +3,16 @@
 import Link from "next/link";
 import React, { useState } from "react";
 
-const Details1 = ({ course }) => {
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
+const Details1 = ({ course , params }) => {
+  const cityCheck = (slug) => {
+    if (slug) {
+      return course.available_cities.find(city => city.slug === slug) ? slug : "";
+    }
+    return "";
+  };
+  
+  const [selectedDate, setSelectedDate] = useState(course.available_dates[0].date);
+  const [selectedCity, setSelectedCity] = useState(cityCheck(params.slug));
   const [customDate, setCustomDate] = useState("");
   const handleDateChange = (value) => {
     setSelectedDate(value);
@@ -65,12 +72,8 @@ const Details1 = ({ course }) => {
       "location": {
         "@type": "Place",
         "name": course?.available_cities?.length > 0 
-          ? course?.available_cities.map(city => city.name).join(", ") 
+          ? (course.available_cities.find(city => city.slug === params.slug)?.name || course.available_cities.map(city => city.name).join(", "))
           : "Default City",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": (course?.available_cities?.length > 0 && course?.available_cities[0]?.name) || "Unknown Location"
-        }
       }
     },
     "offers": {

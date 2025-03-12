@@ -98,9 +98,11 @@ const page = async ({ params }) => {
   const { course } = params;
   const { slug } = params;
   // Fetch both city and specialization data
-  const [courseData, specializationData] = await Promise.all([
+  const [courseData, specializationData, cityData, programData] = await Promise.all([
     fetchCourses(),
     fetchSpecializationData(),
+    fetchData(`${process.env.BACKEND_URL}/cities`), // Fetch cities data
+    fetchData(`${process.env.BACKEND_URL}/programs`), // Fetch programs data
   ]);
 
   const specialization1 = await fetch(
@@ -122,14 +124,21 @@ const page = async ({ params }) => {
 
   const category = await GetSpecialization();
 
-  // Match slug with city or specialization
-  const courses = courseData.data.find((c) => c.slug === course);
-  const specialization = specializationData.data.find((s) => s.slug === course);
+  const courses = courseData?.data?.find((c) => c.slug === course);
+  const specialization = specializationData?.data?.find((s) => s.slug === slug);
+  const city = cityData?.data?.find((c) => c.slug === slug);
+  const program = programData?.data?.find((p) => p.slug === slug);
+  
 
-  // If not found, throw a 404
-  if (!courses && !specialization) {
-    return <NotFound />;
-  }
+ // If not found in any dataset, return 404
+if (!specialization && !city && !program) {
+  return <NotFound />;
+}
+
+if(!courses){
+  return <NotFound />;
+}
+
 
   const data = courses || specialization;
   const type = courses ? "course" : "specialization";
@@ -154,7 +163,7 @@ const page = async ({ params }) => {
             </h1>
           </Design>
           <Suspense fallback={"loading..."}>
-            <Details1 course={data} />
+            <Details1 course={data} params={params}/>
           </Suspense>
 
           <div className="flex justify-center overflow-hidden">

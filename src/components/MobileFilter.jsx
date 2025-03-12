@@ -69,7 +69,7 @@ export default function SearchForm({ cities, specialization }) {
       <div className="grid grid-cols-2 gap-4 mt-4 w-full">
         {/* Specialization Dropdown */}
         <select
-          className="w-full p-3 bg-white border border-[#E5C17C] rounded-lg  text-gray-700 text-sm md:text-base focus:outline-none"
+          className="w-full p-3 bg-white  appearance-none border border-[#E5C17C] rounded-lg  text-gray-700 text-sm md:text-base focus:outline-none"
           value={selectedSpecialization}
           onChange={(e) => setSelectedSpecialization(e.target.value)}
         >
@@ -83,7 +83,7 @@ export default function SearchForm({ cities, specialization }) {
 
         {/* Language Dropdown */}
         <select
-          className="w-full p-3 bg-white border border-[#E5C17C] rounded-lg text-sm text-gray-700  md:text-base focus:outline-none"
+          className="w-full p-3 bg-white border  appearance-none border-[#E5C17C] rounded-lg text-sm text-gray-700  md:text-base focus:outline-none"
           value={selectedLanguage}
           onChange={(e) => setSelectedLanguage(e.target.value)}
         >

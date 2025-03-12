@@ -74,7 +74,7 @@ const Specialization = ({
 
       try {
         const response = await fetch(
-          `https://backendbatd.clinstitute.co.uk/api/courses/${slug}/specializations?query=${query}&per_page=10&page=${page}`,
+          `https://backendbatd.clinstitute.co.uk/api/courses/${slug}/specializations?query=${query}&per_page=50&page=${page}`,
           {
             headers: {
               "Content-Type": "application/json",

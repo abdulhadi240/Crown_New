@@ -36,8 +36,8 @@ const Login_ = () => {
 
   return (
     <div className="relative flex items-center space-x-4">
-      <button onClick={handleLanguageChange} className="flex items-center gap-2 border-[1px] rounded-md border-slate-50/70 px-2 py-1">
-        <Image src={'/ar.webp'} height={30} width={30} alt="Arab Flag" />
+      <button onClick={handleLanguageChange} className="flex items-center gap-2 border-[1px] text-xs rounded-md border-slate-50/70 p-1">
+        <Image src={'/ar.webp'} height={20} width={20} alt="Arab Flag" />
         العربية
       </button>
 

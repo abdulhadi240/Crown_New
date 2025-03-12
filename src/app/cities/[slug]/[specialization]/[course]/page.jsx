@@ -26,6 +26,17 @@ async function fetchBlogDetail(slug) {
   return fetchData(`${process.env.BACKEND_URL}/blogs/${slug}`);
 }
 
+async function fetchSpecializationData() {
+  const res = await fetch(`${process.env.BACKEND_URL}/specializations`, {
+    next: { revalidate: 60 },
+    headers: {
+      "Content-Type": "application/json",
+      "Accept-Language": "en",
+    },
+  });
+  return res.json();
+}
+
 // --------- GENERATE METADATA FUNCTION ---------
 export async function generateMetadata({ params }) {
   const { course } = params;
@@ -80,19 +91,33 @@ export async function generateMetadata({ params }) {
 }
 
 const page = async ({ params }) => {
-  const { course } = params;
+  const { course , slug , specialization } = params;
 
-  const [course1, blog, courseData, blogData] = await Promise.all([
+  const [course1, blog, specializationData, courseData, blogData , cityData] = await Promise.all([
     fetchCourseData(),
     fetchBlogData(),
+    fetchSpecializationData(),
     fetchCourseDetail(course),
     fetchBlogDetail(course),
+    fetchData(`${process.env.BACKEND_URL}/cities`), // Fetch cities data
+
   ]);
+
 
   const courses = course1?.data?.find((c) => c.slug === course);
   const blogs = blog?.data?.find((s) => s.slug === course);
+  const city = cityData?.data?.find((c) => c.slug === slug);
+  const specializations = specializationData?.data?.find((s) => s.slug === specialization);
 
   if (!courses && !blogs) {
+    return <NotFound />;
+  }
+
+  if(!city){
+    return <NotFound />;
+  }
+
+  if(!specializations){
     return <NotFound />;
   }
 
@@ -223,7 +248,7 @@ const page = async ({ params }) => {
             </h1>
           </Design>
           <Suspense fallback={"loading..."}>
-            <Details1 course={data.data} />
+            <Details1 course={data.data} params={params}/>
           </Suspense>
 
           <div className="flex justify-center overflow-hidden">

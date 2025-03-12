@@ -101,7 +101,7 @@ export default function CourseListing({
                             href={`${
                               check_city_courses
                                 ? `/${params}/${course.specialization_slug}/${course.slug}`
-                                : `/${params}/${course.available_cities[0]?.slug}/${course.slug}`
+                                : `/${params}/${course.slug}`
                             }`}
                           >
                             {course.title}
@@ -109,7 +109,7 @@ export default function CourseListing({
                         </TableCell>
                         <TableCell className="py-3 px-4">
                           <select
-                            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:ring-secondary focus:border-secondary"
+                            className="w-full border border-gray-300 rounded px-5  py-2 text-sm focus:ring-secondary focus:border-secondary"
                             value={
                               selectedOptions[course.id]?.selectedDate || ""
                             }
@@ -156,7 +156,7 @@ export default function CourseListing({
                           </select>
                         </TableCell>
                         <TableCell className="py-3 px-4 text-sm text-primary">
-                          {course.price}
+                        £ {course.price}
                         </TableCell>
                         <TableCell className="py-3 px-4 text-center">
                           <Link
@@ -188,7 +188,7 @@ export default function CourseListing({
                         href={`${
                           check_city_courses
                             ? `/${params}/${course.specialization_slug}/${course.slug}`
-                            : `/${params}/${course.available_cities[0]?.slug}/${course.slug}`
+                            : `/${params}/${course.slug}`
                         }`}
                         className="text-base font-semibold text-gray-800"
                       >
@@ -252,7 +252,7 @@ export default function CourseListing({
                       </div>
                       <div className="flex items-center justify-between mt-4">
                         <span className="text-base font-semibold text-gray-800">
-                          {course.price}
+                        £ {course.price}
                         </span>
                         <Link
                           href={`/register?course=${course.slug}&date=${
