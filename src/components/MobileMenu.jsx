@@ -38,7 +38,7 @@ export default function MobileMenu({ color, bg }) {
         window.location.href = newUrl; // Or use router.push(newUrl) if you want to stay within Next.js
       } else {
         // For local development or cases where hostname isn't available
-        const newUrl = `http://${subdomain}${window.location.pathname}${window.location.search}`; // Reconstruct URL
+        const newUrl = `http://${subdomain}${window.location.pathname}`; // Reconstruct URL
         window.location.href = newUrl; // Or router.push(newUrl)
       }
     }
@@ -231,7 +231,7 @@ export default function MobileMenu({ color, bg }) {
             <Link
               href="/Blog"
               className={`block text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ${
-                pathname === "/Blog" ? "underline" : ""
+                pathname === "/blog" ? "underline" : ""
               }`}
               onClick={toggleMenu}
             >
