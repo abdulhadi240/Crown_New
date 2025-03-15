@@ -56,19 +56,16 @@ export async function generateMetadata({ params }) {
       description: "The requested page does not exist.",
     };
   }
-
   return {
-    title: data.meta_title || "London Crown Institute of Training",
-    description:
-      data.meta_description ||
-      "Discover specialized courses and training programs.",
-    keywords:
+    title: `${data.meta_title} In ${params.slug.charAt(0).toUpperCase() + params.slug.slice(1)}` || "London Crown Institute of Training",
+    description: data.meta_description || "Discover specialized courses and training programs.",
+    keywords: 
       data.meta_keywords || "courses, specialization, training, programs",
     alternates: {
       canonical: `https://clinstitute.co.uk/${slug}/${course}`,
     },
     openGraph: {
-      title: data.meta_title || "London Crown Institute of Training",
+      title: `${data.meta_title} In ${params.slug.charAt(0).toUpperCase() + params.slug.slice(1)}` || "London Crown Institute of Training",
       description:
         data.meta_description ||
         "Explore top-notch training programs and courses.",
@@ -85,7 +82,7 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary_large_image",
-      title: data.meta_title || "London Crown Institute of Training",
+      title: `${data.meta_title} In ${params.slug.charAt(0).toUpperCase() + params.slug.slice(1)}` || "London Crown Institute of Training",
       description:
         data.meta_description ||
         "Explore specialized training programs and courses.",

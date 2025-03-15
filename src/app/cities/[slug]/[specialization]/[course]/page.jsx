@@ -59,7 +59,8 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: data?.data?.meta_title || "Crown Academy for Training & Development",
+    title: `${data?.data?.meta_title} - ${params.specialization?.charAt(0).toUpperCase() + params.specialization?.slice(1)} Course in ${params.city?.charAt(0).toUpperCase() + params.city?.slice(1)} `
+ || "Crown Academy for Training & Development",
     description:
       data?.data?.meta_description || "Explore top courses and blogs",
     keywords:
@@ -68,7 +69,7 @@ export async function generateMetadata({ params }) {
       canonical: `https://clinstitute.co.uk/${slug}/${specialization}/${course}`,
     },
     openGraph: {
-      title: data?.data?.meta_title,
+      title: `${data?.data?.meta_title} - ${params.specialization?.charAt(0).toUpperCase() + params.specialization?.slice(1)} Course in ${params.city?.charAt(0).toUpperCase() + params.city?.slice(1)} `,
       description: data?.data?.meta_description,
       url: `https://clinstitute.co.uk/${slug}/${specialization}/${course}`,
       images: [
@@ -83,7 +84,7 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary_large_image",
-      title: data?.data?.meta_title,
+      title: `${data?.data?.meta_title} - ${params.specialization?.charAt(0).toUpperCase() + params.specialization?.slice(1)} Course in ${params.city?.charAt(0).toUpperCase() + params.city?.slice(1)} `,
       description: data?.data?.meta_description,
       images: [data?.data?.image || "https://clinstitute.co.uk/Logocrown.webp"],
     },

@@ -1,5 +1,5 @@
 "use client";
-import ArticleCard from "@/app/Blog/ArticleCard";
+import ArticleCard from "@/app/blog/ArticleCard";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";

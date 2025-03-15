@@ -19,9 +19,9 @@ export default function Footer() {
                 className="mb-4 -mt-12"
               />
               <div className="space-y-4 px-4">
-                <h3 className="text-xl font-semibold">About Crown Institute </h3>
+                <h3 className="text-xl font-semibold">About London Crown Institute of Training </h3>
                 <p className="text-sm w-full md:w-[250px] leading-relaxed">
-                  Crown London Institute is a premier training provider committed to delivering high-quality professional development programs. Based in the heart of London, we specialize in equipping individuals and organizations with the skills and knowledge required to excel in today’s dynamic business environment. 
+                London Crown Institute of Training is a premier training provider committed to delivering high-quality professional development programs. Based in the heart of London, we specialize in equipping individuals and organizations with the skills and knowledge required to excel in today’s dynamic business environment. 
                 </p>
                 <div className="flex items-start md:space-x-2">
                   <svg
