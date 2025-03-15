@@ -1,7 +1,5 @@
 "use client";
-import ArticleCard from "@/app/blog/ArticleCard";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { useState } from "react";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import useMeasure from "react-use-measure";
