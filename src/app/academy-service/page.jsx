@@ -5,6 +5,24 @@ import Link from 'next/link';
 import Design from '../homepage1/components/Design';
 import Head from 'next/head';
 
+
+
+export const metadata = {
+    title: `Academy Services - London Crown Institute of Training`,
+    description: 'Take the first step towards unlocking your full potential. Contact us today to learn more about our services and how we can tailor them to your unique needs.',
+    openGraph: {
+      title: `Academy Services - London Crown Institute of Training`,
+      description: 'Take the first step towards unlocking your full potential. Contact us today to learn more about our services and how we can tailor them to your unique needs.',
+      locale: 'en_US',
+      type: 'website',
+    },
+    robots: {
+      index: true, // Allow indexing
+      follow: true, // Allow following links
+    },
+    
+}
+
 const translations = {
   en: {
     heading: 'Academy Services',
@@ -338,17 +356,7 @@ export default function AcademyService({ params }) {
   const isRTL = locale === 'ar';
 
   return (
-    <><Head>
-      <title>Academy Services - London Crown Institute of Training</title>
-      <meta
-        name="description"
-        content="At Crown London Institute, we're committed to assisting you at every stage. Fill out the form to contact us with any inquiries about our courses or services." />
-      <meta property="og:title" content="Academy Services - London Crown Institute of Training" />
-      <meta
-        property="og:description"
-        content="At Crown London Institute, we're committed to assisting you at every stage. Fill out the form to contact us with any inquiries about our courses or services." />
-      {/* Add more meta tags as needed */}
-    </Head><div>
+    <><div>
         <Design secondary={true} bg={true}></Design>
         <div className="bg-[#0A1828] py-8">
           <h1 className="text-center md:mt-10 md:pt-6 text-3xl font-bold text-white">Academy Services</h1>

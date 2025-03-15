@@ -34,6 +34,31 @@ const workAreas = [
   },
 ];
 
+
+export async function generateMetadata() {
+  return {
+    title: "Work Areas - London Crown Institute of Training",
+    description:
+      "Discover our modern work areas including classrooms, science labs, libraries, and more. Explore a state-of-the-art learning environment.",
+    openGraph: {
+      title: "Work Areas - London Crown Institute of Training",
+      description:
+        "A glimpse into our top-notch facilities, including modern classrooms, science labs, computer labs, and more.",
+      url: "https://clinstitute.co.uk/work-area",
+      type: "website",
+      images: [
+        {
+          url: 'https://clinstitute.co.uk/Logocrown.webp', // First image from work areas
+          width: 800,
+          height: 600,
+          alt: "Modern Classrooms",
+        },
+      ],
+    },
+  };
+}
+
+
 export default function WorkArea({ params }) {
   return (
     <>

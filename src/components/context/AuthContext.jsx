@@ -48,8 +48,9 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem("token", data.token);
             setIsAuthenticated(true);
             setUser(data.user);
-            router.push("/");
-        } else {
+            setTimeout(() => {
+              router.push("/");
+            }, 100);
             throw new Error(data.message || "Invalid login credentials");
         }
     } catch (error) {

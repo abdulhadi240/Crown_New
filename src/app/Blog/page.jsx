@@ -5,6 +5,48 @@ import fetchData from "@/actions/server";
 import Wrapper from "@/components/Wrapper";
 import BlogCarousel from "@/components/BlogCarousel";
 
+
+
+export async function generateMetadata({ params }) {
+
+  const title =
+    "Explore All Blogs - London Crown Institute of Training";
+  const description =
+    "Discover insightful articles and updates from London Crown Institute of Training, your trusted source for professional development and educational resources.";
+  const keywords =
+    "London Crown Institute, professional training, education blogs, career development, learning resources";
+
+  return {
+    title: title,
+    description: description,
+    keywords: keywords,
+    openGraph: {
+      type: "website",
+      locale:`${process.env.LOCALE_LANGUAGE}`,
+      site_name: "London Crown Institute of Training",
+      description: "London Crown Institute of Training",
+      url: `https://clinstitute.co.uk/Blog`,
+      images: 'https://clinstitute.co.uk/Logocrown.webp',
+    },
+    twitter: {
+      site_name: "London Crown Institute of Training",
+      description: "London Crown Institute of Training",
+      url: `https://clinstitute.co.uk/Blog`,
+      images: [
+        {
+          url: "https://clinstitute.co.uk/Logocrown.webp",
+          width: 800,
+          height: 600,
+          alt: "Og Image Alt",
+        },
+      ],
+      card: "summary_large_image",
+      creator: "London Crown Institute of Training",
+    },
+  };
+}
+
+
 const page = async () => {
 
     const category = await fetchData(`${process.env.BACKEND_URL}/blog_categories`)

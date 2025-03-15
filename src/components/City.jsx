@@ -8,6 +8,11 @@ import { IoIosArrowBack } from "react-icons/io";
 import { motion } from "framer-motion";
 import SectionTitle from "./SectionTitle";
 import SectionTitle1 from "./SectionTitle1";
+
+
+
+
+
 const City = ({
   details,
   SpecializationCategory,
@@ -187,15 +192,8 @@ const City = ({
       >
         <div>
           <SectionTitle1
-            title="Training Courses in"
-            highlight={slug
-              .replace(/[-_]/g, " ") // Replace hyphens and underscores with spaces
-              .split(" ") // Split the string into an array of words
-              .map(
-                (word) =>
-                  word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-              ) // Capitalize the first letter of each word
-              .join(" ")}
+            title={'Training Courses in'}
+            highlight={details.data.name}
           />
         </div>
         <div className="relative flex items-center justify-center ">

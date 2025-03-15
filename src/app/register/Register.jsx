@@ -8,7 +8,7 @@ import Design from "../homepage1/components/Design";
 import { CheckCircle, XCircle } from "lucide-react"
 export const dynamic = "force-dynamic";
 
-export default function Page() {
+export default function Register() {
     const searchParams = useSearchParams();
     const [countries, setCountries] = useState([]);
     const [slug, setSlug] = useState("");
@@ -89,7 +89,11 @@ export default function Page() {
   }, [searchParams]);
 
   useEffect(() => {
-    async function getDetail() {
+    setSlug(searchParams.get("course") || "");
+    const initialCitySlug = searchParams.get("city"); // Get the city slug from the URL
+
+    // Fetch the course details after slug is set
+    const getDetail = async () => {
       if (slug) {
         try {
           const res = await fetch(
@@ -104,18 +108,28 @@ export default function Page() {
             }
           );
           if (!res.ok) throw new Error(`Failed to fetch details`);
-
           const d = await res.json();
           setDetail(d);
+
+          // Automatically select the city based on the slug
+          if (d?.data?.available_cities && initialCitySlug) {
+            const cityFromSlug = d.data.available_cities.find(
+              (cityOption) => cityOption.slug === initialCitySlug
+            );
+            if (cityFromSlug) {
+              setCity(cityFromSlug.id); // Set city ID based on the slug
+            }
+          }
+
           return d;
         } catch (error) {
           console.error(error.message);
         }
       }
-    }
+    };
 
     getDetail();
-  }, [slug]);
+  }, [slug, searchParams]);
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -155,6 +169,7 @@ export default function Page() {
       formData.append("city_id", city || "");
       formData.append("date", selectedDate || "");
       formData.append("full_name", fullname || "");
+      formData.append("language", language || "English");
       formData.append("email", email || "");
       formData.append("job_title", jobtitle || "");
       formData.append("phone", phone || "");
@@ -193,6 +208,7 @@ export default function Page() {
       );
 
       const responseData = await response.json(); // Parse JSON response
+      setLoading(false)
 
       // Handle success based on `status`
       if (responseData.status === "success") {
@@ -212,11 +228,12 @@ export default function Page() {
     <>
       <Head>
         <meta name="csrf-token" content="{{ csrf_token() }}"></meta>
+        <meta name="robots" content="noindex, nofollow" />
       </Head>
       <Design secondary={true} bg></Design>
-      <div className="min-h-screen py-10 bg-gray-100 flex items-center justify-center text-base">
+      <div className="min-h-screen py-10 mt-10 bg-gray-100 flex items-center justify-center text-base">
         <div className="bg-white shadow-md rounded-lg md:p-6 p-4 w-full max-w-3xl">
-          <h1 className="text-2xl font-semibold mb-6 text-center">
+          <h1 className="text-2xl font-semibold mb-6 text-center text-primary">
             Register Course
           </h1>
 
@@ -230,32 +247,32 @@ export default function Page() {
                   type="text"
                   value={detail?.data?.title || ""}
                   readOnly
-                  className="w-full cursor-not-allowed   border border-gray-300 rounded-lg p-2 bg-gray-100"
+                  className="w-full text-primary cursor-not-allowed   border border-gray-300 rounded-lg p-2 bg-gray-100"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium sm:mb-2 mt-2 sm:mt-0">
+                <label className="block text-primary text-sm font-medium sm:mb-2 mt-2 sm:mt-0">
                   Category
                 </label>
                 <select
                   value={category}
                   required
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg p-2"
+                  className="w-full text-primary border border-gray-300 rounded-lg p-2"
                 >
                   <option>{detail?.data?.category || "Select Category"}</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm font-medium sm:mb-2 mt-2 sm:mt-0">
+                <label className="block text-primary text-sm font-medium sm:mb-2 mt-2 sm:mt-0">
                   Specialization
                 </label>
                 <select
                   value={specialization}
                   required
                   onChange={(e) => setSpecialization(e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg p-2"
+                  className="w-full text-primary border border-gray-300 rounded-lg p-2"
                 >
                   <option>
                     {detail?.data?.specialization || "Select Specialization"}
@@ -264,18 +281,18 @@ export default function Page() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium sm:mb-2 mt-2 sm:mt-0">
+                <label className="block text-primary text-sm font-medium sm:mb-2 mt-2 sm:mt-0">
                   City
                 </label>
                 <select
                   value={city} // This binds the selected city to the state
                   required
                   onChange={(e) => setCity(e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg p-2"
+                  className="w-full text-primary border border-gray-300 rounded-lg p-2"
                 >
                   {!city && <option>Select City</option>}
                   {detail?.data?.available_cities?.map((cityOption) => (
-                    <option key={cityOption.id} value={cityOption.slug}>
+                    <option key={cityOption.id} value={cityOption.id}>
                       {cityOption.name}
                     </option>
                   ))}
@@ -283,18 +300,17 @@ export default function Page() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium sm:mb-2 mt-2 sm:mt-0">
+                <label className="block text-primary text-sm font-medium sm:mb-2 mt-2 sm:mt-0">
                   Language
                 </label>
                 <select
                   value={language}
                   required
                   onChange={(e) => setLanguage(e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg p-2"
+                  className="w-full text-primary border border-gray-300 rounded-lg p-2"
                 >
-                  <option>Select Language</option>
-                  <option>English</option>
-                  <option>Arabic</option>
+                  <option value={'English'}>English</option>
+                  <option value={'Arabic'}>Arabic</option>
                 </select>
               </div>
 
@@ -332,7 +348,7 @@ export default function Page() {
               </div>*/}
 
               <div className="col-span-2">
-                <label className="block text-sm font-medium sm:mb-2 mt-2 sm:mt-0">
+                <label className="block text-primary text-sm font-medium sm:mb-2 mt-2 sm:mt-0">
                   Available Dates
                 </label>
                 <div className="overflow-x-auto">
@@ -358,11 +374,11 @@ export default function Page() {
                               checked={selectedDate === dateObj.date}
                               onChange={(e) => setSelectedDate(e.target.value)} // Update state directly
                               onClick={() => setSelectedDate(dateObj.date)} // Handle click directly
-                              className="focus:ring-blue-500"
+                              className="focus:ring-blue-500 text-primary"
                             />
                           </td>
                           <td
-                            className="px-4 py-2 text-sm text-gray-700 border-b cursor-pointer"
+                            className="px-4 py-2 text-primary text-sm  border-b cursor-pointer"
                             onClick={() => setSelectedDate(dateObj.date)} // Clicking on the row updates the date
                           >
                             {dateObj.date}
@@ -370,7 +386,7 @@ export default function Page() {
                         </tr>
                       ))}
                       <tr className="hover:bg-gray-100">
-                        <td className="px-4 py-2 text-sm text-gray-700 border-b">
+                        <td className="px-4 py-2 text-sm text-primary border-b">
                           <input
                             type="radio"
                             name="date"
@@ -385,12 +401,12 @@ export default function Page() {
                             className="focus:ring-blue-500"
                           />
                         </td>
-                        <td className="px-4 py-2 text-sm text-gray-700 border-b">
+                        <td className="px-4 py-2 text-sm text-primary border-b">
                           <input
                             type="date"
                             value={selectedDate}
                             onChange={(e) => setSelectedDate(e.target.value)} // Handle custom date change
-                            className="w-full border border-gray-300 rounded-md p-2"
+                            className="w-full border border-gray-300 text-primary rounded-md p-2"
                           />
                         </td>
                       </tr>
@@ -403,10 +419,10 @@ export default function Page() {
             <div className="mt-8">
               <h2 className="text-xl font-semibold mb-6">Participant Form</h2>
               <div className="mb-4">
-                <label className="block text-sm font-medium mb-2">
+                <label className="block text-sm text-primary font-medium mb-2">
                   Participant Type
                 </label>
-                <div className="flex space-x-4">
+                <div className="flex space-x-4 text-primary">
                   <label className="flex items-center space-x-2">
                     <input
                       type="radio"
@@ -414,6 +430,7 @@ export default function Page() {
                       value="Company"
                       checked={participantType === "Company"}
                       onChange={() => handleParticipantTypeChange("Company")}
+                      className="text-primary"
                     />
                     <span>Company</span>
                   </label>
@@ -424,13 +441,15 @@ export default function Page() {
                       value="Person"
                       checked={participantType === "Person"}
                       onChange={() => handleParticipantTypeChange("Person")}
+                      className="text-primary"
+
                     />
                     <span>Person</span>
                   </label>
                 </div>
               </div>
 
-              <div className="mb-6 border-t pt-4">
+              <div className="mb-6 border-t pt-4 text-primary">
                 <h3 className="text-lg font-medium mb-4">
                   {participantType === "Company" ? (
                     <h1>Company Details</h1>
@@ -445,7 +464,7 @@ export default function Page() {
                     required
                     value={fullname}
                     onChange={(e) => setFullname(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-2"
+                    className="w-full border text-primary border-gray-300 rounded-lg p-2"
                   />
                   <input
                     type="email"
@@ -453,7 +472,7 @@ export default function Page() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-2"
+                    className="w-full border text-primary border-gray-300 rounded-lg p-2"
                   />
                   <input
                     type="text"
@@ -461,7 +480,7 @@ export default function Page() {
                     required
                     value={jobtitle}
                     onChange={(e) => setJobTitle(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-2"
+                    className="w-full border text-primary border-gray-300 rounded-lg p-2"
                   />
                   <div className='flex flex-col gap-2'>
                   <input
@@ -470,7 +489,7 @@ export default function Page() {
                     required
                     value={phone}
                     onChange={(e)=>handlePhoneChange(e)}
-                    className="w-full border border-gray-300 rounded-lg p-2"
+                    className="w-full border text-primary border-gray-300 rounded-lg p-2"
                   />
                   {!phoneRegex.test(phone) && phone && (
                   <p className="text-xs text-red-500">Please enter a valid phone number.</p>
@@ -483,7 +502,7 @@ export default function Page() {
                     required
                     value={mobile}
                     onChange={handleMobileChange}
-                    className="w-full border border-gray-300 rounded-lg p-2"
+                    className="w-full border text-primary border-gray-300 rounded-lg p-2"
                   />
                   {!mobileRegex.test(mobile) && mobile && (
                   <p className="text-xs text-red-500">Please enter a valid mobile number.</p>
@@ -495,7 +514,7 @@ export default function Page() {
                     required
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-2"
+                    className="w-full border text-primary border-gray-300 rounded-lg p-2"
                   />
                   <input
                     type="text"
@@ -503,13 +522,13 @@ export default function Page() {
                     required
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-2"
+                    className="w-full border text-primary border-gray-300 rounded-lg p-2"
                   />
                   <select
                     value={country}
                     required
                     onChange={(e) => setCountry(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-2"
+                    className="w-full border text-primary border-gray-300 rounded-lg p-2"
                   >
                     <option>Select Country</option>
                     {countries.map((country) => (
@@ -538,7 +557,7 @@ export default function Page() {
                                 e.target.value
                               )
                             }
-                            className="w-full border border-gray-300 rounded-lg p-2"
+                            className="w-full text-primary border border-gray-300 rounded-lg p-2"
                           />
                           <input
                             type="email"
@@ -547,7 +566,7 @@ export default function Page() {
                             onChange={(e) =>
                               handleInputChange(index, "email", e.target.value)
                             }
-                            className="w-full border border-gray-300 rounded-lg p-2"
+                            className="w-full text-primary border border-gray-300 rounded-lg p-2"
                           />
                           <input
                             type="text"
@@ -560,7 +579,7 @@ export default function Page() {
                                 e.target.value
                               )
                             }
-                            className="w-full border border-gray-300 rounded-lg p-2"
+                            className="w-full text-primary border border-gray-300 rounded-lg p-2"
                           />
                           <input
                             type="tel"
@@ -570,7 +589,7 @@ export default function Page() {
                               handleInputChange(index, "phone", e.target.value)
                             }
                             pattern="^\+?[1-9]\d{1,14}$"
-                            className="w-full border border-gray-300 rounded-lg p-2"
+                            className="w-full text-primary border border-gray-300 rounded-lg p-2"
                           />
                           <input
                             type="tel"
@@ -581,7 +600,7 @@ export default function Page() {
                               handleInputChange(index, "mobile", e.target.value)
                             }
                             pattern="^\+?[1-9]\d{1,14}$"
-                            className="w-full border border-gray-300 rounded-lg p-2"
+                            className="w-full text-primary border border-gray-300 rounded-lg p-2"
                           />
                         </div>
                       </div>

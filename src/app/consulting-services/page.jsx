@@ -5,6 +5,31 @@ import BlogCarousel from "@/components/BlogCarousel";
 import Design from "../homepage1/components/Design";
 import Wrapper from "@/components/Wrapper";
 
+
+
+export async function generateMetadata() {
+  return {
+    title: "All Consulting Services - London Crown Institute of Training",
+    description:
+      "Explore our professional consulting services in the academy, offering expert guidance in education, career development, and personal growth.",
+    openGraph: {
+      title: "Explore Consulting Services - London Crown Institute of Training",
+      description:
+        "Get professional consultations in various fields, including career growth, education strategies, and personal development.",
+      url: "https://clinstitute.co.uk/consulting-services",
+      type: "website",
+      images: [
+        {
+          url: "https://clinstitute.co.uk/Logocrown.webp",
+          width: 800,
+          height: 600,
+          alt: "Consulting Services",
+        },
+      ],
+    },
+  };
+}
+
 const page = async () => {
   const services = await fetchData(`${process.env.BACKEND_URL}/consultations`);
   const catgory = await fetchData(`${process.env.BACKEND_URL}/categories`);
@@ -25,9 +50,6 @@ const page = async () => {
           <span className="text-secondary font-bold">Consultations</span> <br />
         </h1>
       </Design>
-      <heading>
-        <title>All Services in Academy</title>
-      </heading>
       <div className="min-h-screen px-4 py-12 bg-white">
         <div className="mb-12 text-center">
           <h1 className="mb-2 text-4xl text-primary font-bold">

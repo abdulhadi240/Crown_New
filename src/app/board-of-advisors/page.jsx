@@ -16,6 +16,45 @@ import HeaderSection from "@/components/HeaderSection";
 import Link from "next/link";
 import Design from "../homepage1/components/Design";
 
+
+export const metadata = {
+  title: "Board of Advisers - London Crown Institute of Training",
+  description:
+    "Meet our Board of Advisers, a team of experts in education policy, curriculum development, and educational technology.",
+  openGraph: {
+    title: "Board of Advisers - London Crown Institute of Training",
+    description:
+      "Discover our top educational advisors shaping the future of learning.",
+    type: "website",
+    url: "https://clinstitute.co.uk/board-of-advisors",
+    images: [
+      {
+        url: "https://clinstitute.co.uk/Logocrown.webp",
+        width: 1200,
+        height: 630,
+        alt: "Board of Advisers",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Board of Advisers",
+    description:
+      "Meet our educational experts leading innovations in curriculum and technology.",
+    images: ["https://clinstitute.co.uk/Logocrown.webp"],
+  },
+  alternates: {
+    languages: {
+      "en-US": "https://clinstitute.co.uk/board-of-advisors",
+    },
+  },
+  other: {
+    "robots": "index, follow",
+    "author": "London Crown Institute of Training",
+  },
+};
+
+
 const advisers = [
   {
     name: {

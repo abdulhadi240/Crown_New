@@ -35,6 +35,11 @@ const Page = async () => {
     "https://backendbatd.clinstitute.co.uk/api/courses"
   );
 
+  const categories = await fetchData(
+    "https://backendbatd.clinstitute.co.uk/api/specializations_categories_courses"
+  );
+
+
   return (
     <section className="overflow-hidden">
       {/* Hero Section */}
@@ -50,7 +55,7 @@ const Page = async () => {
         </p>
         <div className="mx-4 mb-4 md:mx-0 md:mb-0">
           <MobileFilter
-            cities={cities_all.data}
+            cities={cities_all?.data}
             specialization={specialization_list.data}
           />
         </div>
@@ -63,7 +68,7 @@ const Page = async () => {
       Professional Goals"
       />
       <div className="md:mx-20">
-        <SpecializationSection data={specialization.data} />
+        <SpecializationSection data={categories.data} />
       </div>
       <div>
         <SectionTitle title="Latest" highlight="Courses" />

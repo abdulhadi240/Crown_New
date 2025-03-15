@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Linkedin, Instagram, Twitter, Youtube } from "lucide-react";
+import { FaPinterest } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -93,11 +94,11 @@ export default function Footer() {
           <div className="mx-auto px-4 py-4">
             <div className="flex justify-center space-x-6">
               {[
-                { Icon: Linkedin, href: "#" },
-                { Icon: Facebook, href: "#" },
-                { Icon: Instagram, href: "#" },
-                { Icon: Twitter, href: "#" },
-                { Icon: Youtube, href: "#" },
+                { Icon: Linkedin, href: "https://www.linkedin.com/company/london-crown-institute-of-training/" },
+                { Icon: Facebook, href: "https://www.facebook.com/CrownLondonInstitute/" },
+                { Icon: Instagram, href: "https://www.instagram.com/cli_trainings/" },
+                { Icon: Twitter, href: "https://x.com/CLI_Trainings" },
+                { Icon: FaPinterest, href: "https://www.pinterest.com/CLI_Trainings/" },
               ].map(({ Icon, href }, index) => (
                 <Link
                   key={index}

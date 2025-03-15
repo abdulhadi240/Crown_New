@@ -207,7 +207,7 @@ if(!courses){
 
 export default page;
 
-export async function generateStaticParams() {
+{/** export async function generateStaticParams() {
   const [courseData, specializationData] = await Promise.all([
     fetchCourses(),
     fetchSpecializationData(),
@@ -227,4 +227,4 @@ export async function generateStaticParams() {
     })) || [];
 
   return [...coursePaths, ...specializationPaths];
-}
+}*/}

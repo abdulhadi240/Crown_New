@@ -114,17 +114,19 @@ export async function GetCities() {
 export default async function fetchData(url) {
   try {
     const res = await fetch(url, {
-      next: { revalidate: 60 },
+      next: { revalidate: 0 },
       headers: {
         "Content-Type": "application/json",
         "Accept-Language": `${process.env.LOCALE_LANGUAGE}`,
       },
     });
+    console.log(`Fetching ${url}`);
     if (!res.ok) throw new Error(`Failed to fetch: ${url}`);
-    return res.json();
+    const data = await res.json();
+    console.log(`Body consumed for ${url}`);
+    return data;
   } catch (error) {
     console.error(error.message);
-    return null; // Return null on error
+    return null;
   }
 }
-

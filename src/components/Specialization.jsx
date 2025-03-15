@@ -190,7 +190,7 @@ const Specialization = ({
       >
         <div className="">
           <SectionTitle1
-            title="Courses By"
+            title="Training Courses in"
             highlight={slug}
           />
 
