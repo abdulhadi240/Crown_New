@@ -190,13 +190,13 @@ const City = ({
         search_height={true}
         search
       >
-        <div>
+        <div className="-mt-4">
           <SectionTitle1
             title={'Training Courses in'}
             highlight={details.data.name}
           />
         </div>
-        <div className="relative flex items-center justify-center ">
+        <div className="relative flex items-center justify-center -mt-4">
           {/* Overlay Content */}
           <div className="relative flex flex-col items-center w-full max-w-4xl p-6  bg-opacity-90 rounded-lg  md:p-8">
             {/* Search Input */}

@@ -101,7 +101,7 @@ export default function CourseListing({
                             href={`${
                               check_city_courses
                                 ? `/${params}/${course.specialization_slug}/${course.slug}`
-                                : `/${params}/${course.slug}`
+                                : `/${selectedOptions[course.id]?.selectedCity || course.available_cities[0].slug}/${course.specialization_slug}/${course.slug}`
                             }`}
                           >
                             {course.title}
@@ -188,11 +188,11 @@ export default function CourseListing({
                         href={`${
                           check_city_courses
                             ? `/${params}/${course.specialization_slug}/${course.slug}`
-                            : `/${params}/${course.slug}`
-                        }`}
+                            : `/${selectedOptions[course.id]?.selectedCity || course.available_cities[0].slug}/${course.specialization_slug}/${course.slug}`
+                          }`}
                         className="text-base font-semibold text-gray-800"
                       >
-                        {course.title}
+                        {course.title}12
                       </Link>
                       <div className="flex flex-col gap-4">
                         <div>

@@ -190,8 +190,8 @@ const Specialization = ({
       >
         <div className="">
           <SectionTitle1
-            title="Training Courses in"
-            highlight={slug}
+            title={slug}
+            highlight={'Training Courses'}
           />
 
           <div className="relative flex items-center justify-center">

@@ -246,7 +246,7 @@ export default async function Page({ params }) {
 }
 
 // Generate static paths for static site generation (optional)
-export async function generateStaticParams() {
+{/** export async function generateStaticParams() {
   try {
     const [cityData, specializationData, programData] = await Promise.all([
       fetch(`${process.env.BACKEND_URL}/cities`).then(res => res.ok ? res.json() : { data: [] }),
@@ -263,4 +263,4 @@ export async function generateStaticParams() {
     console.error("Error generating static params:", error);
     return [];
   }
-}
+}*/}

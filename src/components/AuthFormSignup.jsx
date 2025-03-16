@@ -25,16 +25,19 @@ const AuthFormSignup = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   const [apiError, setApiError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [serverErrors, setServerErrors] = useState({});
 
   // 🚀 Form Submission
   const onSubmit = async (formData) => {
     setApiError(null);
+    setServerErrors({});
     setIsLoading(true);
 
     try {
@@ -42,27 +45,51 @@ const AuthFormSignup = () => {
         ...formData,
         locale: "en",
       });
-      if(response?.message){
-        setApiError(response?.message || "Something went wrong.");
-
-      }
+      
       navigate.push("/sign-in"); // ✅ Redirect to the login page after successful signup
     } catch (error) {
-      setApiError(error.response?.data?.message || "Something went wrong.");
+      if (error.response && error.response.data) {
+        const { message, errors: validationErrors } = error.response.data;
+        
+        setApiError(message || "An error occurred during registration.");
+        
+        // Handle validation errors from the server
+        if (validationErrors) {
+          setServerErrors(validationErrors);
+          
+          // Set form errors for each field with validation error
+          Object.keys(validationErrors).forEach(field => {
+            if (field in formData) {
+              setError(field, {
+                type: "server",
+                message: validationErrors[field][0]
+              });
+            }
+          });
+        }
+      } else if (error.request) {
+        setApiError("Network error. Please check your internet connection.");
+      } else {
+        setApiError("An unexpected error occurred. Please try again later.");
+      }
     } finally {
       setIsLoading(false);
     }
   };
 
-  
-
   return (
-    <div className="flex items-center justify-center  px-4 text-sm md:w-[500px] min-w-[350px] -mt-10">
+    <div className="flex items-center justify-center px-4 text-sm md:w-[500px] min-w-[350px] -mt-10">
       <div className="max-w-lg w-full bg-white shadow-lg rounded-lg p-8 space-y-6">
         <h2 className="text-2xl font-bold text-center text-primary">Create an Account</h2>
-        {apiError && <p className="text-red-500 text-center">{apiError}</p>}
+        
+        {apiError && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <p className="font-medium">Registration failed</p>
+            <p>{apiError}</p>
+          </div>
+        )}
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Name Field */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Full Name</label>
@@ -72,7 +99,7 @@ const AuthFormSignup = () => {
               className="w-full text-primary p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-500"
               placeholder="Enter your full name"
             />
-            <p className="text-red-500 text-sm">{errors.name?.message}</p>
+            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
           </div>
 
           {/* Username Field */}
@@ -81,10 +108,16 @@ const AuthFormSignup = () => {
             <input
               type="text"
               {...register("username")}
-              className="w-full text-primary p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-500"
+              className={`w-full text-primary p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-500 ${
+                errors.username || serverErrors.username ? "border-red-500" : "border-gray-300"
+              }`}
               placeholder="Choose a username"
             />
-            <p className="text-red-500 text-sm">{errors.username?.message}</p>
+            {(errors.username || serverErrors.username) && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.username?.message || (serverErrors.username && serverErrors.username[0])}
+              </p>
+            )}
           </div>
 
           {/* Email Field */}
@@ -93,10 +126,16 @@ const AuthFormSignup = () => {
             <input
               type="email"
               {...register("email")}
-              className="w-full text-primary p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-500"
+              className={`w-full text-primary p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-500 ${
+                errors.email || serverErrors.email ? "border-red-500" : "border-gray-300"
+              }`}
               placeholder="Enter your email"
             />
-            <p className="text-red-500 text-sm">{errors.email?.message}</p>
+            {(errors.email || serverErrors.email) && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email?.message || (serverErrors.email && serverErrors.email[0])}
+              </p>
+            )}
           </div>
 
           {/* Password Field */}
@@ -105,10 +144,16 @@ const AuthFormSignup = () => {
             <input
               type="password"
               {...register("password")}
-              className="w-full text-primary p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-500"
+              className={`w-full text-primary p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-500 ${
+                errors.password || serverErrors.password ? "border-red-500" : "border-gray-300"
+              }`}
               placeholder="Enter a strong password"
             />
-            <p className="text-red-500 text-sm">{errors.password?.message}</p>
+            {(errors.password || serverErrors.password) && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password?.message || (serverErrors.password && serverErrors.password[0])}
+              </p>
+            )}
           </div>
 
           {/* Confirm Password Field */}
@@ -117,10 +162,14 @@ const AuthFormSignup = () => {
             <input
               type="password"
               {...register("password_confirmation")}
-              className="w-full text-primary p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-500"
+              className={`w-full text-primary p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-500 ${
+                errors.password_confirmation ? "border-red-500" : "border-gray-300"
+              }`}
               placeholder="Confirm your password"
             />
-            <p className="text-red-500 text-sm">{errors.password_confirmation?.message}</p>
+            {errors.password_confirmation && (
+              <p className="text-red-500 text-sm mt-1">{errors.password_confirmation.message}</p>
+            )}
           </div>
 
           {/* Submit Button */}
@@ -131,10 +180,8 @@ const AuthFormSignup = () => {
             }`}
             disabled={isLoading}
           >
-            {isLoading ? "Signing Up..." : "Sign Up"}
+            {isLoading ? "Creating Account..." : "Sign Up"}
           </button>
-          {apiError && <p className="text-red-500 text-xs text-start">{apiError}</p>
-        }
         </form>
 
         {/* Redirect to Login */}

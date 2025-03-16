@@ -9,15 +9,15 @@ import { motion } from "framer-motion";
 import SectionTitle1 from "./SectionTitle1";
 const Category = ({
   SpecializationCategory,
-  params,
+  course,
   data,
   category,
   city,
   specialization,
+  slug
 }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const {slug , course} = params;
 
   const [coursedata, setCourseData] = useState(data); // Full data
   const [filteredCourses, setFilteredCourses] = useState(data?.data || []); // Filtered data for rendering
@@ -124,15 +124,15 @@ const Category = ({
   const jsonLdData = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "itemListElement": (filteredCourses || []).map((course, index) => ({
+    "itemListElement": (filteredCourses || []).map((course1, index) => ({
       "@type": "ListItem",
       "position": index + 1,
       "item": {
         "@type": "Course",
-        "name": course?.title || "Unnamed Course",
-        "description": course?.summary || "No description available.",
-        "category": course?.category || "Training",
-        "url": `https://clinstitute.co.uk/${params || "default-category"}/${(course?.available_cities?.[0]?.slug) || "default-city"}/${course?.slug || "default-course"}`,
+        "name": course1?.title || "Unnamed Course",
+        "description": course1?.summary || "No description available.",
+        "category": course1?.category || "Training",
+        "url": `https://clinstitute.co.uk/${slug}}/${course}`,
         "provider": {
           "@type": "Organization",
           "name": "London Crown Institute of Training",
@@ -140,7 +140,7 @@ const Category = ({
         },
         "image": {
           "@type": "ImageObject",
-          "url": course?.image || "https://clinstitute.co.uk/default-course-image.webp"
+          "url": course1?.image || "https://clinstitute.co.uk/Logocrown.webp"
         },
         "hasCourseInstance": {
           "@type": "CourseInstance",
@@ -154,18 +154,18 @@ const Category = ({
           },
           "location": {
             "@type": "Place",
-            "name": course?.available_cities?.length > 0 
-              ? course?.available_cities.map(city => city.name).join(", ") 
+            "name": course1?.available_cities?.length > 0 
+              ? course1?.available_cities.map(city => city.name).join(", ") 
               : "Default City"
           }
         },
         "offers": {
           "@type": "Offer",
           "category": "Paid",
-          "price": course?.price || "3000",
+          "price": course1?.price || "3000",
           "priceCurrency": "GBP",
           "availability": "https://schema.org/InStock",
-          "validFrom": (course?.available_dates?.length > 0 && course?.available_dates[0]?.date) || "2025-01-01"
+          "validFrom": (course1?.available_dates?.length > 0 && course1?.available_dates[0]?.date) || "2025-01-01"
         }
       }
     }))
@@ -188,13 +188,13 @@ const Category = ({
         search
         
       >
-        <div className="">
+        <div className="-mt-4">
           <SectionTitle1
-            title="Training Courses in"
-            highlight={slug}
+            title={course}
+            highlight='Training Courses '
           />
 
-          <div className="relative flex items-center justify-center">
+          <div className="relative flex items-center justify-center -mt-4">
             {/* Overlay Content */}
             <div className="relative mb-6 flex flex-col items-center w-full max-w-4xl p-6  bg-opacity-90 rounded-lg  md:p-8">
               {/* Search Input */}
@@ -263,15 +263,15 @@ const Category = ({
                   ))}
                 </select>
                 <select
-                  value={selectedCategory}
+                  value={selectedSpecialization}
                   onChange={(e) => {
-                    setSelectedCategory(e.target.value);
-                    updateSearchParams("category", e.target.value);
+                    setSelectedSpecialization(e.target.value);
+                    updateSearchParams("specialization", e.target.value);
                   }}
                   className="w-full px-4 text-primary py-2 text-sm border border-gray-300 rounded-md md:text-base focus:outline-none focus:ring-2 focus:ring-primary"
                 >
-                  <option value="">Category</option>
-                  {category?.data?.map((cat) => (
+                  <option value="">Specialization</option>
+                  {specialization?.data?.map((cat) => (
                     <option key={cat.id} value={cat.slug}>
                       {cat.name}
                     </option>

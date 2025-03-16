@@ -16,21 +16,19 @@ const Login_ = () => {
 
   const handleLanguageChange = () => {
     if (typeof window !== 'undefined') {
-      const lang = 'ar'; // Or get this dynamically
-      const subdomain = `${lang}.clinstitute.co.uk`;
       const currentHost = window.location.hostname;
-
-      // Handle cases where there might not be a current host (e.g., local dev)
-      if (currentHost) {
-        const newHost = subdomain;
-        const newUrl = window.location.href.replace(currentHost, newHost);
-        window.location.href = newUrl;  // Or use router.push(newUrl) if you want to stay within Next.js
-      } else {
-        // For local development or cases where hostname isn't available
-        const newUrl = `http://${subdomain}${window.location.pathname}${window.location.search}`; // Reconstruct URL
-        window.location.href = newUrl; // Or router.push(newUrl)
-      }
-
+      
+      // Get main domain (last two parts of hostname)
+      const domainParts = currentHost.split('.');
+      const mainDomain = domainParts.length >= 2 
+        ? domainParts.slice(-2).join('.') 
+        : currentHost;
+      
+      // Construct the new URL with just the ar subdomain + main domain
+      const newUrl = `${window.location.protocol}//ar.${mainDomain}`;
+      
+      // Redirect
+      window.location.href = newUrl;
     }
   };
 

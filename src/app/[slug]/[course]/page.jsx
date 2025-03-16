@@ -9,10 +9,22 @@ import SearchFilters_cities from "@/app/cities/[slug]/components/SearchFilters_c
 import Design from "@/app/homepage1/components/Design";
 import BlogCarousel from "@/components/BlogCarousel";
 import Wrapper from "@/components/Wrapper";
+import Category from "@/components/Category";
 
 // Function to fetch specialization data
 async function fetchSpecializationData() {
   const res = await fetch(`${process.env.BACKEND_URL}/specializations`, {
+    next: { revalidate: 60 },
+    headers: {
+      "Content-Type": "application/json",
+      "Accept-Language": "en",
+    },
+  });
+  return res.json();
+}
+
+async function fetchCategoryData() {
+  const res = await fetch(`${process.env.BACKEND_URL}/categories`, {
     next: { revalidate: 60 },
     headers: {
       "Content-Type": "application/json",
@@ -33,23 +45,28 @@ async function fetchCourses() {
   return courses.json();
 }
 
+function formatSlug(slug) {
+  return slug
+    .split('-') // Split by hyphen
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+    .join(' '); // Join words with a space
+}
+
+
 export async function generateMetadata({ params }) {
   const { course, slug } = params;
 
-  // Fetch course and specialization data
-  const [courseData, specializationData] = await Promise.all([
-    fetchCourses(),
-    fetchSpecializationData(),
-  ]);
+  const courseData = await fetchCourses()
+  const categoryData = await fetchCategoryData()
 
   // Match data based on the slug or course
   const courses = courseData?.data?.find((c) => c.slug === course);
-  const specialization = specializationData?.data?.find(
+  const category = categoryData?.data?.find(
     (s) => s.slug === course
   );
 
   // Fallback to 404 if no valid data found
-  const data = courses || specialization;
+  const data = courses || category;
   if (!data) {
     return {
       title: "Page Not Found",
@@ -57,7 +74,7 @@ export async function generateMetadata({ params }) {
     };
   }
   return {
-    title: `${data.meta_title} In ${params.slug.charAt(0).toUpperCase() + params.slug.slice(1)}` || "London Crown Institute of Training",
+    title: `${data.meta_title} In ${formatSlug(slug)}` || "London Crown Institute of Training",
     description: data.meta_description || "Discover specialized courses and training programs.",
     keywords: 
       data.meta_keywords || "courses, specialization, training, programs",
@@ -65,7 +82,7 @@ export async function generateMetadata({ params }) {
       canonical: `https://clinstitute.co.uk/${slug}/${course}`,
     },
     openGraph: {
-      title: `${data.meta_title} In ${params.slug.charAt(0).toUpperCase() + params.slug.slice(1)}` || "London Crown Institute of Training",
+      title: `${data.meta_title} In ${formatSlug(slug)}` || "London Crown Institute of Training",
       description:
         data.meta_description ||
         "Explore top-notch training programs and courses.",
@@ -82,7 +99,7 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${data.meta_title} In ${params.slug.charAt(0).toUpperCase() + params.slug.slice(1)}` || "London Crown Institute of Training",
+      title: `${data.meta_title} In ${formatSlug(course)}` || "London Crown Institute of Training",
       description:
         data.meta_description ||
         "Explore specialized training programs and courses.",
@@ -101,6 +118,7 @@ const page = async ({ params }) => {
     fetchData(`${process.env.BACKEND_URL}/cities`), // Fetch cities data
     fetchData(`${process.env.BACKEND_URL}/programs`), // Fetch programs data
   ]);
+  
 
   const specialization1 = await fetch(
     `${process.env.BACKEND_URL}/specializations`,
@@ -119,12 +137,21 @@ const page = async ({ params }) => {
     },
   }).then((res) => res.json());
 
+  const Category_Specialization = await fetch(`${process.env.BACKEND_URL}/courses_specializations_categories/${slug}/${course}`, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept-Language": "en",
+    },
+  }).then((res) => res.json());
+  
+
   const category = await GetSpecialization();
 
   const courses = courseData?.data?.find((c) => c.slug === course);
   const specialization = specializationData?.data?.find((s) => s.slug === slug);
   const city = cityData?.data?.find((c) => c.slug === slug);
   const program = programData?.data?.find((p) => p.slug === slug);
+  const category_ = Category1?.data?.find((c) => c.slug === course);
   
 
  // If not found in any dataset, return 404
@@ -132,12 +159,12 @@ if (!specialization && !city && !program) {
   return <NotFound />;
 }
 
-if(!courses){
+if(!courses && !category_){
   return <NotFound />;
 }
 
 
-  const data = courses || specialization;
+  const data = courses || Category_Specialization;
   const type = courses ? "course" : "specialization";
 
   const course_specialization = await GetSpecificSpecialization(course);
@@ -177,12 +204,14 @@ if(!courses){
       ) : (
         <>
           <Suspense fallback={"loading..."}>
-            <SearchFilters_cities
+            <Category
               post={course_specialization}
               search
-              params={course}
+              slug={params.slug}
+              course={params.course}
               specialization={specialization1}
               Category={Category1.data}
+              city={cityData}
             />
           </Suspense>
 

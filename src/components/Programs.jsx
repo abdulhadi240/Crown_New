@@ -192,7 +192,7 @@ const Programs = ({
       >
       <div className="-mt-16 md:-mt-0">
       <div className="pt-3">
-        <SectionTitle1 reverse title={slug === 'diploma' ? "Diploma" : slug === 'masters' ? "Mini Master" : "Explore Our"} highlight={slug === 'diploma' ? "Training Courses" : slug === 'masters' ? "Training Courses" : "Training Courses"} className=""/>
+        <SectionTitle1 reverse title={slug === 'diploma' ? "Mini Diploma" : slug === 'masters' ? "Mini Master" : "Explore Our"} highlight={slug === 'diploma' ? "Training Courses" : slug === 'masters' ? "Training Courses" : "Training Courses"} className=""/>
 </div>
         <div className="relative flex items-center justify-center ">
           {/* Overlay Content */}
